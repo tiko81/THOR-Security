@@ -61,7 +61,6 @@ body {
     left: 35px;
 
     width: 130px;
-
     height: auto;
 
     z-index: 10;
@@ -79,7 +78,6 @@ nav {
     right: 35px;
 
     display: flex;
-
     align-items: center;
 
     gap: 25px;
@@ -93,7 +91,6 @@ nav a {
     text-decoration: none;
 
     font-size: 16px;
-
     font-weight: 500;
 
     transition: 0.3s;
@@ -157,7 +154,6 @@ nav a:hover {
     text-align: center;
 
     width: 90%;
-
     max-width: 900px;
 }
 
@@ -176,7 +172,7 @@ nav a:hover {
 
     line-height: 1.6;
 
-    color: white;
+    color: #ffffff;
 }
 
 
@@ -208,11 +204,9 @@ nav a:hover {
     position: absolute;
 
     left: 0;
-
     top: 5px;
 
     width: 4px;
-
     height: 38px;
 
     background: #c9a227;
@@ -398,25 +392,17 @@ nav a:hover {
 ========================= */
 
 .gallery {
-    padding: 85px 40px 100px;
+    padding: 85px 40px;
 
     background: #f5f5f5;
 
     text-align: center;
 }
 
-.gallery-intro {
-    font-size: 18px;
-
-    color: #555;
-
-    margin-bottom: 45px;
-}
-
 .gallery-grid {
     max-width: 1200px;
 
-    margin: 0 auto;
+    margin: 10px auto 0;
 
     display: grid;
 
@@ -428,195 +414,119 @@ nav a:hover {
 .gallery-item {
     position: relative;
 
-    height: 260px;
-
     overflow: hidden;
 
     border-radius: 8px;
 
     cursor: pointer;
 
-    background: #111;
+    background: #ddd;
 
-    box-shadow:
-        0 5px 18px rgba(0,0,0,0.12);
+    aspect-ratio: 16 / 10;
 }
 
 .gallery-item img {
     width: 100%;
-
     height: 100%;
 
     object-fit: cover;
 
     display: block;
 
-    transition: transform 0.5s ease;
+    transition: 0.4s;
 }
 
-.gallery-item::after {
-    content: "⌕";
+.gallery-item:hover img {
+    transform: scale(1.06);
+}
 
+.gallery-overlay {
     position: absolute;
 
     inset: 0;
 
+    background: rgba(0,0,0,0);
+
     display: flex;
 
     align-items: center;
-
     justify-content: center;
-
-    background: rgba(0,0,0,0.35);
-
-    color: white;
-
-    font-size: 45px;
-
-    opacity: 0;
 
     transition: 0.3s;
 }
 
-.gallery-item:hover img {
-    transform: scale(1.07);
+.gallery-overlay span {
+    opacity: 0;
+
+    color: white;
+
+    font-size: 40px;
+
+    transition: 0.3s;
 }
 
-.gallery-item:hover::after {
+.gallery-item:hover .gallery-overlay {
+    background: rgba(0,0,0,0.35);
+}
+
+.gallery-item:hover .gallery-overlay span {
     opacity: 1;
 }
 
 
 /* =========================
-   LIGHTBOX
+   PHOTO MODAL
 ========================= */
 
-.lightbox {
-    position: fixed;
-
-    inset: 0;
-
-    background: rgba(0,0,0,0.94);
-
+.photo-modal {
     display: none;
 
-    align-items: center;
-
-    justify-content: center;
+    position: fixed;
 
     z-index: 9999;
 
-    padding: 40px;
+    inset: 0;
+
+    background: rgba(0,0,0,0.92);
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
 }
 
-.lightbox.show {
+.photo-modal.active {
     display: flex;
 }
 
-.lightbox img {
-    max-width: 90%;
-
-    max-height: 85vh;
+.photo-modal img {
+    max-width: 92%;
+    max-height: 88vh;
 
     object-fit: contain;
 
-    border-radius: 5px;
+    border-radius: 6px;
 
-    box-shadow:
-        0 10px 40px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 50px rgba(0,0,0,0.5);
 }
 
-
-/* CLOSE */
-
-.lightbox-close {
+.close-modal {
     position: absolute;
 
     top: 20px;
-
     right: 30px;
 
     color: white;
 
-    font-size: 45px;
+    font-size: 42px;
 
     cursor: pointer;
 
     line-height: 1;
-
-    transition: 0.3s;
 }
 
-.lightbox-close:hover {
+.close-modal:hover {
     color: #c9a227;
-}
-
-
-/* NEXT / PREVIOUS */
-
-.lightbox-prev,
-.lightbox-next {
-    position: absolute;
-
-    top: 50%;
-
-    transform: translateY(-50%);
-
-    width: 55px;
-
-    height: 55px;
-
-    border-radius: 50%;
-
-    border: 1px solid rgba(255,255,255,0.5);
-
-    background: rgba(0,0,0,0.4);
-
-    color: white;
-
-    font-size: 30px;
-
-    cursor: pointer;
-
-    transition: 0.3s;
-}
-
-.lightbox-prev {
-    left: 25px;
-}
-
-.lightbox-next {
-    right: 25px;
-}
-
-.lightbox-prev:hover,
-.lightbox-next:hover {
-    background: #c9a227;
-
-    border-color: #c9a227;
-}
-
-
-/* PHOTO COUNTER */
-
-.photo-counter {
-    position: absolute;
-
-    bottom: 20px;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    color: white;
-
-    font-size: 15px;
-
-    background: rgba(0,0,0,0.5);
-
-    padding: 6px 12px;
-
-    border-radius: 20px;
 }
 
 
@@ -634,49 +544,107 @@ nav a:hover {
     text-align: center;
 }
 
-.contact h2 {
-    font-size: 38px;
-
-    margin-bottom: 15px;
+.contact .section-title {
+    color: white;
 }
 
-.contact p {
-    font-size: 18px;
+.contact-info {
+    max-width: 900px;
 
-    margin-bottom: 30px;
+    margin: 20px auto 35px;
 
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 18px;
+}
+
+.contact-item {
+    padding: 20px;
+
+    background: #1b1b1b;
+
+    border: 1px solid #292929;
+
+    border-radius: 8px;
+
+    transition: 0.3s;
+}
+
+.contact-item:hover {
+    border-color: #c9a227;
+
+    transform: translateY(-3px);
+}
+
+.contact-icon {
+    font-size: 28px;
+
+    margin-bottom: 8px;
+}
+
+.contact-item h3 {
+    font-size: 17px;
+
+    margin-bottom: 7px;
+}
+
+.contact-item a,
+.contact-item span {
     color: #ddd;
+
+    text-decoration: none;
+
+    font-size: 16px;
+}
+
+.contact-item a:hover {
+    color: #c9a227;
 }
 
 
 /* =========================
-   BUTTON
+   SOCIAL NETWORKS
 ========================= */
 
-.button {
-    display: inline-block;
+.social-links {
+    margin-top: 25px;
 
-    padding: 13px 30px;
+    display: flex;
 
-    background: #c9a227;
+    justify-content: center;
+
+    gap: 15px;
+}
+
+.social-link {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 145px;
+
+    padding: 12px 20px;
+
+    border: 1px solid #444;
+
+    border-radius: 5px;
 
     color: white;
 
     text-decoration: none;
 
-    border-radius: 4px;
-
-    font-size: 16px;
-
-    font-weight: 600;
-
     transition: 0.3s;
 }
 
-.button:hover {
-    background: #a98618;
+.social-link:hover {
+    background: #c9a227;
 
-    transform: translateY(-2px);
+    border-color: #c9a227;
+
+    color: white;
 }
 
 
@@ -816,46 +784,25 @@ footer {
     }
 
     .gallery {
-        padding: 60px 20px 70px;
+        padding: 60px 20px;
     }
 
     .gallery-grid {
         grid-template-columns: 1fr;
     }
 
-    .gallery-item {
-        height: 250px;
+    .contact-info {
+        grid-template-columns: 1fr;
     }
 
-    .lightbox {
-        padding: 20px;
+    .social-links {
+        flex-direction: column;
+
+        align-items: center;
     }
 
-    .lightbox img {
-        max-width: 95%;
-
-        max-height: 75vh;
-    }
-
-    .lightbox-prev,
-    .lightbox-next {
-        width: 45px;
-
-        height: 45px;
-
-        font-size: 24px;
-    }
-
-    .lightbox-prev {
-        left: 10px;
-    }
-
-    .lightbox-next {
-        right: 10px;
-    }
-
-    .contact h2 {
-        font-size: 30px;
+    .social-link {
+        width: 220px;
     }
 }
 
@@ -900,7 +847,7 @@ footer {
     </a>
 
     <a href="#gallery" data-key="galleryMenu">
-        Նկարադարան
+        Նկարներ
     </a>
 
     <a href="#contact" data-key="contactMenu">
@@ -954,23 +901,17 @@ footer {
      SERVICES
 ========================= -->
 
-<section
-    class="services"
-    id="services"
->
+<section class="services" id="services">
 
 <h2
     class="section-title"
-    data-key="servicesTitle"
->
+    data-key="servicesTitle">
     Մեր ծառայությունները
 </h2>
 
-
 <p
     class="services-intro"
-    data-key="servicesIntro"
->
+    data-key="servicesIntro">
     THOR համակարգը առաջարկում է անվտանգության
     ժամանակակից լուծումներ։
 </p>
@@ -1061,32 +1002,26 @@ footer {
      ABOUT
 ========================= -->
 
-<section
-    class="about"
-    id="about"
->
+<section class="about" id="about">
 
 <div class="about-container">
 
-    <h2
-        class="section-title"
-        data-key="aboutTitle"
-    >
-        Մեր մասին
-    </h2>
+<h2
+    class="section-title"
+    data-key="aboutTitle">
+    Մեր մասին
+</h2>
 
-
-    <p
-        class="about-text"
-        data-key="aboutText"
-    >
-        THOR Security-ը անվտանգության ոլորտում
-        ժամանակակից և հուսալի լուծումներ առաջարկող
-        համակարգ է։ Մենք ձգտում ենք ապահովել մարդկանց,
-        բնակարանների, բիզնեսների և տարբեր օբյեկտների
-        անվտանգությունը՝ համատեղելով մասնագիտական
-        մոտեցումը և ժամանակակից տեխնոլոգիաները։
-    </p>
+<p
+    class="about-text"
+    data-key="aboutText">
+    THOR Security-ը անվտանգության ոլորտում
+    ժամանակակից և հուսալի լուծումներ առաջարկող
+    համակարգ է։ Մենք ձգտում ենք ապահովել մարդկանց,
+    բնակարանների, բիզնեսների և տարբեր օբյեկտների
+    անվտանգությունը՝ համատեղելով մասնագիտական
+    մոտեցումը և ժամանակակից տեխնոլոգիաները։
+</p>
 
 </div>
 
@@ -1098,15 +1033,11 @@ footer {
      ADVANTAGES
 ========================= -->
 
-<section
-    class="advantages"
-    id="advantages"
->
+<section class="advantages" id="advantages">
 
 <h2
     class="section-title"
-    data-key="advantagesTitle"
->
+    data-key="advantagesTitle">
     Ինչու THOR
 </h2>
 
@@ -1195,104 +1126,124 @@ footer {
      GALLERY
 ========================= -->
 
-<section
-    class="gallery"
-    id="gallery"
->
+<section class="gallery" id="gallery">
 
 <h2
     class="section-title"
-    data-key="galleryTitle"
->
-    Նկարադարան
+    data-key="galleryTitle">
+    Նկարներ
 </h2>
-
-
-<p
-    class="gallery-intro"
-    data-key="galleryIntro"
->
-    THOR Security-ի աշխատանքը և անվտանգության լուծումները։
-</p>
 
 
 <div class="gallery-grid">
 
 
-<div
-    class="gallery-item"
-    onclick="openLightbox(0)"
->
+<div class="gallery-item" onclick="openPhoto('IMG_001.jpg')">
 
-    <img
-        src="IMG_001.jpg"
-        alt="THOR Security"
-    >
+    <img src="IMG_001.jpg" alt="THOR Security">
+
+    <div class="gallery-overlay">
+        <span>+</span>
+    </div>
 
 </div>
 
 
-<div
-    class="gallery-item"
-    onclick="openLightbox(1)"
->
+<div class="gallery-item" onclick="openPhoto('IMG_002.jpg')">
 
-    <img
-        src="IMG_002.jpg"
-        alt="THOR Security"
-    >
+    <img src="IMG_002.jpg" alt="THOR Security">
+
+    <div class="gallery-overlay">
+        <span>+</span>
+    </div>
 
 </div>
 
 
-<div
-    class="gallery-item"
-    onclick="openLightbox(2)"
->
+<div class="gallery-item" onclick="openPhoto('IMG_003.jpg')">
 
-    <img
-        src="IMG_003.jpg"
-        alt="THOR Security"
-    >
+    <img src="IMG_003.jpg" alt="THOR Security">
+
+    <div class="gallery-overlay">
+        <span>+</span>
+    </div>
 
 </div>
 
 
-<div
-    class="gallery-item"
-    onclick="openLightbox(3)"
->
+<div class="gallery-item" onclick="openPhoto('IMG_004.jpg')">
 
-    <img
-        src="IMG_004.jpg"
-        alt="THOR Security"
-    >
+    <img src="IMG_004.jpg" alt="THOR Security">
+
+    <div class="gallery-overlay">
+        <span>+</span>
+    </div>
 
 </div>
 
 
-<div
-    class="gallery-item"
-    onclick="openLightbox(4)"
->
+<div class="gallery-item" onclick="openPhoto('IMG_005.jpg')">
 
-    <img
-        src="IMG_005.jpg"
-        alt="THOR Security"
-    >
+    <img src="IMG_005.jpg" alt="THOR Security">
+
+    <div class="gallery-overlay">
+        <span>+</span>
+    </div>
 
 </div>
 
 
-<div
-    class="gallery-item"
-    onclick="openLightbox(5)"
->
+<div class="gallery-item" onclick="openPhoto('IMG_006.jpg')">
 
-    <img
-        src="IMG_006.jpg"
-        alt="THOR Security"
-    >
+    <img src="IMG_006.jpg" alt="THOR Security">
+
+    <div class="gallery-overlay">
+        <span>+</span>
+    </div>
+
+</div>
+
+
+<div class="gallery-item" onclick="openPhoto('IMG_007.jpg')">
+
+    <img src="IMG_007.jpg" alt="THOR Security">
+
+    <div class="gallery-overlay">
+        <span>+</span>
+    </div>
+
+</div>
+
+
+<div class="gallery-item" onclick="openPhoto('IMG_008.jpg')">
+
+    <img src="IMG_008.jpg" alt="THOR Security">
+
+    <div class="gallery-overlay">
+        <span>+</span>
+    </div>
+
+</div>
+
+
+<div class="gallery-item" onclick="openPhoto('IMG_009.jpg')">
+
+    <img src="IMG_009.jpg" alt="THOR Security">
+
+    <div class="gallery-overlay">
+        <span>+</span>
+    </div>
+
+</div>
+
+
+<div class="gallery-item" onclick="openPhoto('IMG_010.jpg')">
+
+    <img src="IMG_010.jpg" alt="THOR Security">
+
+    <div class="gallery-overlay">
+        <span>+</span>
+    </div>
 
 </div>
 
@@ -1304,54 +1255,24 @@ footer {
 
 
 <!-- =========================
-     LIGHTBOX
+     PHOTO MODAL
 ========================= -->
 
 <div
-    class="lightbox"
-    id="lightbox"
-    onclick="closeLightbox(event)"
->
+    class="photo-modal"
+    id="photoModal"
+    onclick="closePhoto()">
 
+    <span
+        class="close-modal"
+        onclick="closePhoto()">
+        ×
+    </span>
 
-<span
-    class="lightbox-close"
-    onclick="closeLightbox()"
->
-    ×
-</span>
-
-
-<button
-    class="lightbox-prev"
-    onclick="previousPhoto(event)"
->
-    ‹
-</button>
-
-
-<img
-    id="lightboxImage"
-    src=""
-    alt="THOR Security"
->
-
-
-<button
-    class="lightbox-next"
-    onclick="nextPhoto(event)"
->
-    ›
-</button>
-
-
-<div
-    class="photo-counter"
-    id="photoCounter"
->
-    1 / 6
-</div>
-
+    <img
+        id="modalImage"
+        src=""
+        alt="THOR Security">
 
 </div>
 
@@ -1361,28 +1282,126 @@ footer {
      CONTACT
 ========================= -->
 
-<section
-    class="contact"
-    id="contact"
->
+<section class="contact" id="contact">
 
-<h2 data-key="contactTitle">
-    THOR Security
+<h2
+    class="section-title"
+    data-key="contactTitle">
+    Կապ մեզ հետ
 </h2>
 
 
-<p data-key="contactText">
+<div class="contact-info">
+
+
+<div class="contact-item">
+
+    <div class="contact-icon">
+        📞
+    </div>
+
+    <h3 data-key="phoneTitle">
+        Հեռախոս
+    </h3>
+
+    <a href="tel:+37477010057">
+        +374 77 010057
+    </a>
+
+</div>
+
+
+<div class="contact-item">
+
+    <div class="contact-icon">
+        📧
+    </div>
+
+    <h3>
+        E-mail
+    </h3>
+
+    <a href="mailto:thorscrt@gmail.com">
+        thorscrt@gmail.com
+    </a>
+
+</div>
+
+
+<div class="contact-item">
+
+    <div class="contact-icon">
+        📍
+    </div>
+
+    <h3 data-key="addressTitle">
+        Հասցե
+    </h3>
+
+    <span>
+        Տիգրան Մեծ 61
+    </span>
+
+</div>
+
+
+<div class="contact-item">
+
+    <div class="contact-icon">
+        💬
+    </div>
+
+    <h3>
+        WhatsApp / Viber
+    </h3>
+
+    <a href="tel:+37477010057">
+        +374 77 010057
+    </a>
+
+</div>
+
+
+</div>
+
+
+<p
+    data-key="contactText">
     Ձեր անվտանգությունը մեր առաջնահերթությունն է։
 </p>
 
 
+<div class="social-links">
+
+
 <a
-    href="#"
-    class="button"
-    data-key="contactButton"
->
-    Կապվել մեզ հետ
+    class="social-link"
+    href="https://www.facebook.com/thorarmenia/about"
+    target="_blank"
+    rel="noopener">
+    Facebook
 </a>
+
+
+<a
+    class="social-link"
+    href="https://www.instagram.com/thorsecurityarmenia/"
+    target="_blank"
+    rel="noopener">
+    Instagram
+</a>
+
+
+<a
+    class="social-link"
+    href="https://wa.me/37477010057"
+    target="_blank"
+    rel="noopener">
+    WhatsApp
+</a>
+
+
+</div>
 
 </section>
 
@@ -1404,129 +1423,44 @@ footer {
 
 
 /* =========================
-   GALLERY
+   PHOTO GALLERY
 ========================= */
 
-const photos = [
-    "IMG_001.jpg",
-    "IMG_002.jpg",
-    "IMG_003.jpg",
-    "IMG_004.jpg",
-    "IMG_005.jpg",
-    "IMG_006.jpg"
-];
+function openPhoto(image) {
 
-let currentPhoto = 0;
+    const modal =
+        document.getElementById("photoModal");
 
+    const modalImage =
+        document.getElementById("modalImage");
 
-function openLightbox(index) {
+    modalImage.src = image;
 
-    currentPhoto = index;
-
-    document
-        .getElementById("lightboxImage")
-        .src = photos[currentPhoto];
-
-    document
-        .getElementById("photoCounter")
-        .textContent =
-        (currentPhoto + 1) + " / " + photos.length;
-
-    document
-        .getElementById("lightbox")
-        .classList.add("show");
-
-    document.body.style.overflow = "hidden";
+    modal.classList.add("active");
 }
 
 
-function closeLightbox(event) {
+function closePhoto() {
 
-    if (
-        event &&
-        event.target !== document.getElementById("lightbox")
-    ) {
-        return;
-    }
+    const modal =
+        document.getElementById("photoModal");
 
-    document
-        .getElementById("lightbox")
-        .classList.remove("show");
-
-    document.body.style.overflow = "";
-}
-
-
-function nextPhoto(event) {
-
-    if (event) {
-        event.stopPropagation();
-    }
-
-    currentPhoto++;
-
-    if (currentPhoto >= photos.length) {
-        currentPhoto = 0;
-    }
-
-    updatePhoto();
-}
-
-
-function previousPhoto(event) {
-
-    if (event) {
-        event.stopPropagation();
-    }
-
-    currentPhoto--;
-
-    if (currentPhoto < 0) {
-        currentPhoto = photos.length - 1;
-    }
-
-    updatePhoto();
-}
-
-
-function updatePhoto() {
-
-    document
-        .getElementById("lightboxImage")
-        .src = photos[currentPhoto];
-
-    document
-        .getElementById("photoCounter")
-        .textContent =
-        (currentPhoto + 1) + " / " + photos.length;
+    modal.classList.remove("active");
 }
 
 
 /* =========================
-   KEYBOARD
+   ESC TO CLOSE PHOTO
 ========================= */
 
 document.addEventListener(
     "keydown",
     function(event) {
 
-        const lightbox =
-            document.getElementById("lightbox");
-
-        if (!lightbox.classList.contains("show")) {
-            return;
-        }
-
         if (event.key === "Escape") {
-            closeLightbox();
-        }
 
-        if (event.key === "ArrowRight") {
-            nextPhoto();
-        }
+            closePhoto();
 
-        if (event.key === "ArrowLeft") {
-            previousPhoto();
         }
 
     }
@@ -1540,310 +1474,292 @@ document.addEventListener(
 
 const translations = {
 
-    hy: {
 
-        home: "Գլխավոր",
+hy: {
 
-        servicesMenu: "Ծառայություններ",
+home: "Գլխավոր",
+servicesMenu: "Ծառայություններ",
+aboutMenu: "Մեր մասին",
+advantagesMenu: "Առավելություններ",
+galleryMenu: "Նկարներ",
+contactMenu: "Հետադարձ կապ",
 
-        aboutMenu: "Մեր մասին",
+heroText:
+"Ժամանակակից և հուսալի անվտանգության լուծումներ Ձեր, Ձեր տան և Ձեր բիզնեսի համար։",
 
-        advantagesMenu: "Առավելություններ",
+servicesTitle:
+"Մեր ծառայությունները",
 
-        galleryMenu: "Նկարադարան",
+servicesIntro:
+"THOR համակարգը առաջարկում է անվտանգության ժամանակակից լուծումներ։",
 
-        contactMenu: "Հետադարձ կապ",
+service1Title:
+"Ֆիզիկական պահպանություն",
 
-        heroText:
-        "Ժամանակակից և հուսալի անվտանգության լուծումներ Ձեր, Ձեր տան և Ձեր բիզնեսի համար։",
+service1Text:
+"Մասնագիտական պահնորդական ծառայություններ Ձեր և Ձեր գույքի անվտանգության համար։",
 
-        servicesTitle:
-        "Մեր ծառայությունները",
+service2Title:
+"Տեսահսկման համակարգեր",
 
-        servicesIntro:
-        "THOR համակարգը առաջարկում է անվտանգության ժամանակակից լուծումներ։",
+service2Text:
+"Ժամանակակից տեսահսկման և անվտանգության համակարգերի տեղադրում և սպասարկում։",
 
-        service1Title:
-        "Ֆիզիկական պահպանություն",
+service3Title:
+"Արագ արձագանքման ծառայություն",
 
-        service1Text:
-        "Մասնագիտական պահնորդական ծառայություններ Ձեր և Ձեր գույքի անվտանգության համար։",
+service3Text:
+"Արագ և արդյունավետ արձագանք վտանգավոր իրավիճակների դեպքում։",
 
-        service2Title:
-        "Տեսահսկման համակարգեր",
+service4Title:
+"Բնակարանների և բիզնեսների պաշտպանություն",
 
-        service2Text:
-        "Ժամանակակից տեսահսկման և անվտանգության համակարգերի տեղադրում և սպասարկում։",
+service4Text:
+"Ձեր տան, բնակարանի և բիզնեսի համալիր անվտանգության ապահովում։",
 
-        service3Title:
-        "Արագ արձագանքման ծառայություն",
+aboutTitle:
+"Մեր մասին",
 
-        service3Text:
-        "Արագ և արդյունավետ արձագանք վտանգավոր իրավիճակների դեպքում։",
+aboutText:
+"THOR Security-ը անվտանգության ոլորտում ժամանակակից և հուսալի լուծումներ առաջարկող համակարգ է։ Մենք ձգտում ենք ապահովել մարդկանց, բնակարանների, բիզնեսների և տարբեր օբյեկտների անվտանգությունը՝ համատեղելով մասնագիտական մոտեցումը և ժամանակակից տեխնոլոգիաները։",
 
-        service4Title:
-        "Բնակարանների և բիզնեսների պաշտպանություն",
+advantagesTitle:
+"Ինչու THOR",
 
-        service4Text:
-        "Ձեր տան, բնակարանի և բիզնեսի համալիր անվտանգության ապահովում։",
+advantage1Title:
+"Հուսալիություն",
 
-        aboutTitle:
-        "Մեր մասին",
+advantage1Text:
+"Ձեր անվտանգությունը մեր առաջնահերթությունն է։",
 
-        aboutText:
-        "THOR Security-ը անվտանգության ոլորտում ժամանակակից և հուսալի լուծումներ առաջարկող համակարգ է։ Մենք ձգտում ենք ապահովել մարդկանց, բնակարանների, բիզնեսների և տարբեր օբյեկտների անվտանգությունը՝ համատեղելով մասնագիտական մոտեցումը և ժամանակակից տեխնոլոգիաները։",
+advantage2Title:
+"Արագ արձագանք",
 
-        advantagesTitle:
-        "Ինչու THOR",
+advantage2Text:
+"Արագ և արդյունավետ գործողություններ անհրաժեշտ պահին։",
 
-        advantage1Title:
-        "Հուսալիություն",
+advantage3Title:
+"Ժամանակակից տեխնոլոգիաներ",
 
-        advantage1Text:
-        "Ձեր անվտանգությունը մեր առաջնահերթությունն է։",
+advantage3Text:
+"Ժամանակակից անվտանգության և տեսահսկման լուծումներ։",
 
-        advantage2Title:
-        "Արագ արձագանք",
+advantage4Title:
+"Պրոֆեսիոնալ մոտեցում",
 
-        advantage2Text:
-        "Արագ և արդյունավետ գործողություններ անհրաժեշտ պահին։",
+advantage4Text:
+"Անհատական մոտեցում յուրաքանչյուր հաճախորդի և օբյեկտի նկատմամբ։",
 
-        advantage3Title:
-        "Ժամանակակից տեխնոլոգիաներ",
+galleryTitle:
+"Նկարներ",
 
-        advantage3Text:
-        "Ժամանակակից անվտանգության և տեսահսկման լուծումներ։",
+contactTitle:
+"Կապ մեզ հետ",
 
-        advantage4Title:
-        "Պրոֆեսիոնալ մոտեցում",
+phoneTitle:
+"Հեռախոս",
 
-        advantage4Text:
-        "Անհատական մոտեցում յուրաքանչյուր հաճախորդի և օբյեկտի նկատմամբ։",
+addressTitle:
+"Հասցե",
 
-        galleryTitle:
-        "Նկարադարան",
+contactText:
+"Ձեր անվտանգությունը մեր առաջնահերթությունն է։"
 
-        galleryIntro:
-        "THOR Security-ի աշխատանքը և անվտանգության լուծումները։",
+},
 
-        contactTitle:
-        "THOR Security",
 
-        contactText:
-        "Ձեր անվտանգությունը մեր առաջնահերթությունն է։",
+ru: {
 
-        contactButton:
-        "Կապվել մեզ հետ"
-    },
+home: "Главная",
+servicesMenu: "Услуги",
+aboutMenu: "О нас",
+advantagesMenu: "Почему THOR",
+galleryMenu: "Фотографии",
+contactMenu: "Контакты",
 
+heroText:
+"Современные и надежные решения для безопасности вас, вашего дома и вашего бизнеса.",
 
-    ru: {
+servicesTitle:
+"Наши услуги",
 
-        home:
-        "Главная",
+servicesIntro:
+"THOR предлагает современные решения в сфере безопасности.",
 
-        servicesMenu:
-        "Услуги",
+service1Title:
+"Физическая охрана",
 
-        aboutMenu:
-        "О нас",
+service1Text:
+"Профессиональные охранные услуги для защиты вас и вашего имущества.",
 
-        advantagesMenu:
-        "Почему THOR",
+service2Title:
+"Системы видеонаблюдения",
 
-        galleryMenu:
-        "Галерея",
+service2Text:
+"Установка и обслуживание современных систем видеонаблюдения и безопасности.",
 
-        contactMenu:
-        "Контакты",
+service3Title:
+"Служба быстрого реагирования",
 
-        heroText:
-        "Современные и надежные решения для безопасности вас, вашего дома и вашего бизнеса.",
+service3Text:
+"Быстрое и эффективное реагирование в опасных ситуациях.",
 
-        servicesTitle:
-        "Наши услуги",
+service4Title:
+"Защита домов и бизнеса",
 
-        servicesIntro:
-        "THOR предлагает современные решения в сфере безопасности.",
+service4Text:
+"Комплексное обеспечение безопасности вашего дома, квартиры и бизнеса.",
 
-        service1Title:
-        "Физическая охрана",
+aboutTitle:
+"О нас",
 
-        service1Text:
-        "Профессиональные охранные услуги для защиты вас и вашего имущества.",
+aboutText:
+"THOR Security — система, предлагающая современные и надежные решения в сфере безопасности. Мы стремимся обеспечивать безопасность людей, домов, бизнеса и различных объектов, сочетая профессиональный подход и современные технологии.",
 
-        service2Title:
-        "Системы видеонаблюдения",
+advantagesTitle:
+"Почему THOR",
 
-        service2Text:
-        "Установка и обслуживание современных систем видеонаблюдения и безопасности.",
+advantage1Title:
+"Надежность",
 
-        service3Title:
-        "Служба быстрого реагирования",
+advantage1Text:
+"Ваша безопасность — наш главный приоритет.",
 
-        service3Text:
-        "Быстрое и эффективное реагирование в случае возникновения опасной ситуации.",
+advantage2Title:
+"Быстрое реагирование",
 
-        service4Title:
-        "Защита домов и бизнеса",
+advantage2Text:
+"Быстрые и эффективные действия в нужный момент.",
 
-        service4Text:
-        "Комплексное обеспечение безопасности вашего дома, квартиры и бизнеса.",
+advantage3Title:
+"Современные технологии",
 
-        aboutTitle:
-        "О нас",
+advantage3Text:
+"Современные решения в области безопасности и видеонаблюдения.",
 
-        aboutText:
-        "THOR Security — современная система, предлагающая надежные решения в сфере безопасности. Мы стремимся обеспечивать безопасность людей, домов, бизнеса и различных объектов, сочетая профессиональный подход с современными технологиями.",
+advantage4Title:
+"Профессиональный подход",
 
-        advantagesTitle:
-        "Почему THOR",
+advantage4Text:
+"Индивидуальный подход к каждому клиенту и объекту.",
 
-        advantage1Title:
-        "Надежность",
+galleryTitle:
+"Фотографии",
 
-        advantage1Text:
-        "Ваша безопасность — наш главный приоритет.",
+contactTitle:
+"Связаться с нами",
 
-        advantage2Title:
-        "Быстрое реагирование",
+phoneTitle:
+"Телефон",
 
-        advantage2Text:
-        "Быстрые и эффективные действия в нужный момент.",
+addressTitle:
+"Адрес",
 
-        advantage3Title:
-        "Современные технологии",
+contactText:
+"Ваша безопасность — наш главный приоритет."
 
-        advantage3Text:
-        "Современные решения в области безопасности и видеонаблюдения.",
+},
 
-        advantage4Title:
-        "Профессиональный подход",
 
-        advantage4Text:
-        "Индивидуальный подход к каждому клиенту и объекту.",
+en: {
 
-        galleryTitle:
-        "Фотогалерея",
+home: "Home",
+servicesMenu: "Services",
+aboutMenu: "About Us",
+advantagesMenu: "Why THOR",
+galleryMenu: "Photos",
+contactMenu: "Contact",
 
-        galleryIntro:
-        "Работа THOR Security и наши решения в сфере безопасности.",
+heroText:
+"Modern and reliable security solutions for you, your home and your business.",
 
-        contactTitle:
-        "THOR Security",
+servicesTitle:
+"Our Services",
 
-        contactText:
-        "Ваша безопасность — наш главный приоритет.",
+servicesIntro:
+"THOR provides modern security solutions for your protection.",
 
-        contactButton:
-        "Связаться с нами"
-    },
+service1Title:
+"Physical Security",
 
+service1Text:
+"Professional security services to protect you and your property.",
 
-    en: {
+service2Title:
+"Video Surveillance",
 
-        home:
-        "Home",
+service2Text:
+"Installation and maintenance of modern video surveillance and security systems.",
 
-        servicesMenu:
-        "Services",
+service3Title:
+"Rapid Response Service",
 
-        aboutMenu:
-        "About Us",
+service3Text:
+"Fast and effective response in dangerous situations.",
 
-        advantagesMenu:
-        "Why THOR",
+service4Title:
+"Home and Business Protection",
 
-        galleryMenu:
-        "Gallery",
+service4Text:
+"Comprehensive security solutions for your home, apartment and business.",
 
-        contactMenu:
-        "Contact",
+aboutTitle:
+"About Us",
 
-        heroText:
-        "Modern and reliable security solutions for you, your home and your business.",
+aboutText:
+"THOR Security provides modern and reliable security solutions. We aim to protect people, homes, businesses and various facilities by combining professional expertise with modern technologies.",
 
-        servicesTitle:
-        "Our Services",
+advantagesTitle:
+"Why THOR",
 
-        servicesIntro:
-        "THOR provides modern security solutions for your safety.",
+advantage1Title:
+"Reliability",
 
-        service1Title:
-        "Physical Security",
+advantage1Text:
+"Your safety is our highest priority.",
 
-        service1Text:
-        "Professional security services to protect you and your property.",
+advantage2Title:
+"Rapid Response",
 
-        service2Title:
-        "Video Surveillance",
+advantage2Text:
+"Fast and effective action when it matters.",
 
-        service2Text:
-        "Installation and maintenance of modern video surveillance and security systems.",
+advantage3Title:
+"Modern Technologies",
 
-        service3Title:
-        "Rapid Response",
+advantage3Text:
+"Modern security and video surveillance solutions.",
 
-        service3Text:
-        "Fast and effective response in dangerous situations.",
+advantage4Title:
+"Professional Approach",
 
-        service4Title:
-        "Home & Business Protection",
+advantage4Text:
+"An individual approach to every client and facility.",
 
-        service4Text:
-        "Comprehensive security for your home, apartment and business.",
+galleryTitle:
+"Photos",
 
-        aboutTitle:
-        "About Us",
+contactTitle:
+"Contact Us",
 
-        aboutText:
-        "THOR Security is a modern security system providing reliable solutions in the field of protection. We strive to protect people, homes, businesses and various facilities by combining a professional approach with modern technologies.",
+phoneTitle:
+"Phone",
 
-        advantagesTitle:
-        "Why THOR",
+addressTitle:
+"Address",
 
-        advantage1Title:
-        "Reliability",
+contactText:
+"Your safety is our highest priority."
 
-        advantage1Text:
-        "Your security is our highest priority.",
-
-        advantage2Title:
-        "Rapid Response",
-
-        advantage2Text:
-        "Fast and effective action when it matters.",
-
-        advantage3Title:
-        "Modern Technology",
-
-        advantage3Text:
-        "Modern security and video surveillance solutions.",
-
-        advantage4Title:
-        "Professional Approach",
-
-        advantage4Text:
-        "Individual approach to every client and facility.",
-
-        galleryTitle:
-        "Photo Gallery",
-
-        galleryIntro:
-        "THOR Security work and our security solutions.",
-
-        contactTitle:
-        "THOR Security",
-
-        contactText:
-        "Your security is our highest priority.",
-
-        contactButton:
-        "Contact Us"
-    }
+}
 
 };
 
+
+
+/* =========================
+   CHANGE LANGUAGE
+========================= */
 
 function setLanguage(language) {
 
@@ -1854,10 +1770,7 @@ function setLanguage(language) {
             const key =
                 element.getAttribute("data-key");
 
-            if (
-                translations[language] &&
-                translations[language][key]
-            ) {
+            if (translations[language][key]) {
 
                 element.textContent =
                     translations[language][key];
@@ -1901,17 +1814,19 @@ function setLanguage(language) {
     }
 
 
-    document.documentElement.lang = language;
+    document.documentElement.lang =
+        language;
 }
 
 
-/* DEFAULT LANGUAGE */
+/* =========================
+   DEFAULT LANGUAGE
+========================= */
 
 setLanguage("hy");
 
 
 </script>
-
 
 </body>
 
