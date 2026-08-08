@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="hy">
 
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111111">
 
 <title>THOR Security</title>
 
@@ -24,7 +25,7 @@ html {
 body {
     font-family: Arial, Helvetica, sans-serif;
     color: #111;
-    background: white;
+    background: #fff;
 }
 
 
@@ -44,7 +45,7 @@ body {
         url("thor-bg.jpg");
 
     background-size: cover;
-    background-position: center;
+    background-position: center center;
 
     color: white;
 }
@@ -64,6 +65,12 @@ body {
     height: auto;
 
     z-index: 10;
+
+    display: block;
+
+    object-fit: contain;
+
+    image-rendering: auto;
 }
 
 
@@ -146,10 +153,10 @@ nav a:hover {
 .hero-center {
     position: absolute;
 
-    top: 83%;
     left: 50%;
+    bottom: 55px;
 
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
 
     text-align: center;
 
@@ -172,7 +179,7 @@ nav a:hover {
 
     line-height: 1.6;
 
-    color: #ffffff;
+    color: #fff;
 }
 
 
@@ -220,7 +227,7 @@ nav a:hover {
 ========================= */
 
 .services {
-    background: white;
+    background: #fff;
 
     padding: 80px 40px 90px;
 
@@ -330,7 +337,7 @@ nav a:hover {
 .advantages {
     padding: 85px 40px;
 
-    background: white;
+    background: #fff;
 
     text-align: center;
 }
@@ -455,22 +462,17 @@ nav a:hover {
     transition: 0.3s;
 }
 
+
+/* =========================
+   УБРАЛИ "+"
+========================= */
+
 .gallery-overlay span {
-    opacity: 0;
-
-    color: white;
-
-    font-size: 40px;
-
-    transition: 0.3s;
+    display: none;
 }
 
 .gallery-item:hover .gallery-overlay {
     background: rgba(0,0,0,0.35);
-}
-
-.gallery-item:hover .gallery-overlay span {
-    opacity: 1;
 }
 
 
@@ -487,12 +489,12 @@ nav a:hover {
 
     inset: 0;
 
-    background: rgba(0,0,0,0.92);
+    background: rgba(0,0,0,0.94);
 
     align-items: center;
     justify-content: center;
 
-    padding: 30px;
+    padding: 25px;
 }
 
 .photo-modal.active {
@@ -500,21 +502,22 @@ nav a:hover {
 }
 
 .photo-modal img {
-    max-width: 92%;
+    max-width: 94%;
     max-height: 88vh;
 
     object-fit: contain;
 
     border-radius: 6px;
 
-    box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+    box-shadow:
+        0 10px 50px rgba(0,0,0,0.5);
 }
 
 .close-modal {
     position: absolute;
 
-    top: 20px;
-    right: 30px;
+    top: 18px;
+    right: 28px;
 
     color: white;
 
@@ -690,6 +693,7 @@ footer {
     .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
 }
 
 
@@ -700,50 +704,91 @@ footer {
 @media (max-width: 700px) {
 
     .hero {
-        min-height: 650px;
+        min-height: 720px;
+
+        background-size: cover;
+
+        background-position: center center;
     }
+
+
+    /* LOGO */
 
     .logo {
-        width: 100px;
+        width: 85px;
 
-        top: 20px;
+        top: 18px;
 
-        left: 20px;
+        left: 18px;
+
+        height: auto;
+
+        max-width: 85px;
     }
 
-    nav {
-        top: 20px;
 
-        right: 15px;
+    /* MENU */
+
+    nav {
+        top: 18px;
+
+        right: 12px;
 
         flex-direction: column;
 
         align-items: flex-end;
 
-        gap: 8px;
+        gap: 7px;
     }
 
     nav a {
-        font-size: 14px;
+        font-size: 13px;
     }
 
+
+    /* LANGUAGES */
+
     .languages {
-        margin-top: 5px;
+        margin-top: 4px;
 
         margin-left: 0;
     }
 
+    .lang-btn {
+        padding: 5px 8px;
+
+        font-size: 12px;
+    }
+
+
+    /* HERO TEXT */
+
     .hero-center {
-        top: 58%;
+        left: 50%;
+
+        bottom: 35px;
+
+        width: 90%;
+
+        transform: translateX(-50%);
     }
 
     .hero-center h1 {
-        font-size: 36px;
+        font-size: 34px;
+
+        letter-spacing: 1px;
+
+        margin-bottom: 10px;
     }
 
     .hero-center p {
-        font-size: 16px;
+        font-size: 15px;
+
+        line-height: 1.5;
     }
+
+
+    /* SECTIONS */
 
     .services {
         padding: 60px 20px;
@@ -753,6 +798,8 @@ footer {
         font-size: 30px;
 
         padding-left: 14px;
+
+        margin-bottom: 28px;
     }
 
     .section-title::before {
@@ -763,9 +810,15 @@ footer {
         top: 3px;
     }
 
+
+    /* SERVICE CARDS */
+
     .service-cards {
         grid-template-columns: 1fr;
     }
+
+
+    /* ABOUT */
 
     .about {
         padding: 60px 20px;
@@ -773,7 +826,12 @@ footer {
 
     .about-text {
         font-size: 16px;
+
+        line-height: 1.7;
     }
+
+
+    /* ADVANTAGES */
 
     .advantages {
         padding: 60px 20px;
@@ -783,12 +841,28 @@ footer {
         grid-template-columns: 1fr;
     }
 
+
+    /* GALLERY */
+
     .gallery {
         padding: 60px 20px;
     }
 
     .gallery-grid {
         grid-template-columns: 1fr;
+
+        gap: 15px;
+    }
+
+    .gallery-item {
+        aspect-ratio: 16 / 10;
+    }
+
+
+    /* CONTACT */
+
+    .contact {
+        padding: 60px 20px;
     }
 
     .contact-info {
@@ -804,15 +878,74 @@ footer {
     .social-link {
         width: 220px;
     }
+
+
+    /* PHOTO MODAL */
+
+    .photo-modal {
+        padding: 15px;
+    }
+
+    .photo-modal img {
+        max-width: 96%;
+
+        max-height: 82vh;
+    }
+
+    .close-modal {
+        top: 15px;
+
+        right: 18px;
+
+        font-size: 38px;
+    }
+
+}
+
+
+/* =========================
+   VERY SMALL PHONES
+========================= */
+
+@media (max-width: 400px) {
+
+    .hero {
+        min-height: 680px;
+    }
+
+    .logo {
+        width: 75px;
+
+        top: 15px;
+
+        left: 15px;
+    }
+
+    nav {
+        right: 10px;
+
+        top: 15px;
+    }
+
+    nav a {
+        font-size: 12px;
+    }
+
+    .hero-center h1 {
+        font-size: 30px;
+    }
+
+    .hero-center p {
+        font-size: 14px;
+    }
+
 }
 
 </style>
 
 </head>
 
-
 <body>
-
 
 <!-- =========================
      HERO
@@ -820,82 +953,84 @@ footer {
 
 <section class="hero" id="home">
 
-
 <img
-    class="logo"
-    src="IMG_8160.png"
-    alt="THOR Security"
->
+class="logo"
+src="IMG_8160.png"
+alt="THOR Security"
+width="130"
+decoding="async"
 
+>
 
 <nav>
 
-    <a href="#home" data-key="home">
-        Գլխավոր
-    </a>
+```
+<a href="#home" data-key="home">
+    Գլխավոր
+</a>
 
-    <a href="#services" data-key="servicesMenu">
-        Ծառայություններ
-    </a>
+<a href="#services" data-key="servicesMenu">
+    Ծառայություններ
+</a>
 
-    <a href="#about" data-key="aboutMenu">
-        Մեր մասին
-    </a>
+<a href="#about" data-key="aboutMenu">
+    Մեր մասին
+</a>
 
-    <a href="#advantages" data-key="advantagesMenu">
-        Առավելություններ
-    </a>
+<a href="#advantages" data-key="advantagesMenu">
+    Առավելություններ
+</a>
 
-    <a href="#gallery" data-key="galleryMenu">
-        Նկարներ
-    </a>
+<a href="#gallery" data-key="galleryMenu">
+    Նկարներ
+</a>
 
-    <a href="#contact" data-key="contactMenu">
-        Հետադարձ կապ
-    </a>
+<a href="#contact" data-key="contactMenu">
+    Հետադարձ կապ
+</a>
 
 
-    <div class="languages">
+<div class="languages">
 
-        <button
-            class="lang-btn active"
-            onclick="setLanguage('hy')">
-            Հայ
-        </button>
+    <button
+        class="lang-btn active"
+        onclick="setLanguage('hy')">
+        Հայ
+    </button>
 
-        <button
-            class="lang-btn"
-            onclick="setLanguage('ru')">
-            Рус
-        </button>
+    <button
+        class="lang-btn"
+        onclick="setLanguage('ru')">
+        Рус
+    </button>
 
-        <button
-            class="lang-btn"
-            onclick="setLanguage('en')">
-            ENG
-        </button>
+    <button
+        class="lang-btn"
+        onclick="setLanguage('en')">
+        ENG
+    </button>
 
-    </div>
+</div>
+```
 
 </nav>
 
-
 <div class="hero-center">
 
-    <h1>
-        THOR Security
-    </h1>
+```
+<h1>
+    THOR Security
+</h1>
 
-    <p data-key="heroText">
-        Ժամանակակից և հուսալի անվտանգության լուծումներ
-        Ձեր, Ձեր տան և Ձեր բիզնեսի համար։
-    </p>
+<p data-key="heroText">
+    Ժամանակակից և հուսալի անվտանգության լուծումներ
+    Ձեր, Ձեր տան և Ձեր բիզնեսի համար։
+</p>
+```
 
 </div>
 
 </section>
-
-
 
 <!-- =========================
      SERVICES
@@ -916,87 +1051,87 @@ footer {
     ժամանակակից լուծումներ։
 </p>
 
-
 <div class="service-cards">
 
-
 <div class="service-card">
 
-    <div class="service-icon">
-        🛡️
-    </div>
+```
+<div class="service-icon">
+    🛡️
+</div>
 
-    <h3 data-key="service1Title">
-        Ֆիզիկական պահպանություն
-    </h3>
+<h3 data-key="service1Title">
+    Ֆիզիկական պահպանություն
+</h3>
 
-    <p data-key="service1Text">
-        Մասնագիտական պահնորդական ծառայություններ
-        Ձեր և Ձեր գույքի անվտանգության համար։
-    </p>
+<p data-key="service1Text">
+    Մասնագիտական պահնորդական ծառայություններ
+    Ձեր և Ձեր գույքի անվտանգության համար։
+</p>
+```
 
 </div>
 
-
 <div class="service-card">
 
-    <div class="service-icon">
-        📹
-    </div>
+```
+<div class="service-icon">
+    📹
+</div>
 
-    <h3 data-key="service2Title">
-        Տեսահսկման համակարգեր
-    </h3>
+<h3 data-key="service2Title">
+    Տեսահսկման համակարգեր
+</h3>
 
-    <p data-key="service2Text">
-        Ժամանակակից տեսահսկման և անվտանգության
-        համակարգերի տեղադրում և սպասարկում։
-    </p>
+<p data-key="service2Text">
+    Ժամանակակից տեսահսկման և անվտանգության
+    համակարգերի տեղադրում և սպասարկում։
+</p>
+```
 
 </div>
 
-
 <div class="service-card">
 
-    <div class="service-icon">
-        🚨
-    </div>
+```
+<div class="service-icon">
+    🚨
+</div>
 
-    <h3 data-key="service3Title">
-        Արագ արձագանքման ծառայություն
-    </h3>
+<h3 data-key="service3Title">
+    Արագ արձագանքման ծառայություն
+</h3>
 
-    <p data-key="service3Text">
-        Արագ և արդյունավետ արձագանք
-        վտանգավոր իրավիճակների դեպքում։
-    </p>
+<p data-key="service3Text">
+    Արագ և արդյունավետ արձագանք
+    վտանգավոր իրավիճակների դեպքում։
+</p>
+```
 
 </div>
 
-
 <div class="service-card">
 
-    <div class="service-icon">
-        🏠
-    </div>
-
-    <h3 data-key="service4Title">
-        Բնակարանների և բիզնեսների պաշտպանություն
-    </h3>
-
-    <p data-key="service4Text">
-        Ձեր տան, բնակարանի և բիզնեսի
-        համալիր անվտանգության ապահովում։
-    </p>
-
+```
+<div class="service-icon">
+    🏠
 </div>
 
+<h3 data-key="service4Title">
+    Բնակարանների և բիզնեսների պաշտպանություն
+</h3>
+
+<p data-key="service4Text">
+    Ձեր տան, բնակարանի և բիզնեսի
+    համալիր անվտանգության ապահովում։
+</p>
+```
+
+</div>
 
 </div>
 
 </section>
-
-
 
 <!-- =========================
      ABOUT
@@ -1027,8 +1162,6 @@ footer {
 
 </section>
 
-
-
 <!-- =========================
      ADVANTAGES
 ========================= -->
@@ -1041,86 +1174,86 @@ footer {
     Ինչու THOR
 </h2>
 
-
 <div class="advantages-grid">
 
-
 <div class="advantage-card">
 
-    <div class="advantage-icon">
-        🛡️
-    </div>
+```
+<div class="advantage-icon">
+    🛡️
+</div>
 
-    <h3 data-key="advantage1Title">
-        Հուսալիություն
-    </h3>
+<h3 data-key="advantage1Title">
+    Հուսալիություն
+</h3>
 
-    <p data-key="advantage1Text">
-        Ձեր անվտանգությունը մեր առաջնահերթությունն է։
-    </p>
+<p data-key="advantage1Text">
+    Ձեր անվտանգությունը մեր առաջնահերթությունն է։
+</p>
+```
 
 </div>
 
-
 <div class="advantage-card">
 
-    <div class="advantage-icon">
-        ⚡
-    </div>
+```
+<div class="advantage-icon">
+    ⚡
+</div>
 
-    <h3 data-key="advantage2Title">
-        Արագ արձագանք
-    </h3>
+<h3 data-key="advantage2Title">
+    Արագ արձագանք
+</h3>
 
-    <p data-key="advantage2Text">
-        Արագ և արդյունավետ գործողություններ
-        անհրաժեշտ պահին։
-    </p>
+<p data-key="advantage2Text">
+    Արագ և արդյունավետ գործողություններ
+    անհրաժեշտ պահին։
+</p>
+```
 
 </div>
 
-
 <div class="advantage-card">
 
-    <div class="advantage-icon">
-        📹
-    </div>
+```
+<div class="advantage-icon">
+    📹
+</div>
 
-    <h3 data-key="advantage3Title">
-        Ժամանակակից տեխնոլոգիաներ
-    </h3>
+<h3 data-key="advantage3Title">
+    Ժամանակակից տեխնոլոգիաներ
+</h3>
 
-    <p data-key="advantage3Text">
-        Ժամանակակից անվտանգության և
-        տեսահսկման լուծումներ։
-    </p>
+<p data-key="advantage3Text">
+    Ժամանակակից անվտանգության և
+    տեսահսկման լուծումներ։
+</p>
+```
 
 </div>
 
-
 <div class="advantage-card">
 
-    <div class="advantage-icon">
-        🤝
-    </div>
-
-    <h3 data-key="advantage4Title">
-        Պրոֆեսիոնալ մոտեցում
-    </h3>
-
-    <p data-key="advantage4Text">
-        Անհատական մոտեցում յուրաքանչյուր
-        հաճախորդի և օբյեկտի նկատմամբ։
-    </p>
-
+```
+<div class="advantage-icon">
+    🤝
 </div>
 
+<h3 data-key="advantage4Title">
+    Պրոֆեսիոնալ մոտեցում
+</h3>
+
+<p data-key="advantage4Text">
+    Անհատական մոտեցում յուրաքանչյուր
+    հաճախորդի և օբյեկտի նկատմամբ։
+</p>
+```
+
+</div>
 
 </div>
 
 </section>
-
-
 
 <!-- =========================
      GALLERY
@@ -1134,125 +1267,171 @@ footer {
     Նկարներ
 </h2>
 
-
 <div class="gallery-grid">
-
 
 <div class="gallery-item" onclick="openPhoto('IMG_001.jpg')">
 
-    <img src="IMG_001.jpg" alt="THOR Security">
+```
+<img
+    src="IMG_001.jpg"
+    alt="THOR Security"
+    loading="lazy"
+    decoding="async">
 
-    <div class="gallery-overlay">
-        <span>+</span>
-    </div>
+<div class="gallery-overlay">
+    <span>+</span>
+</div>
+```
 
 </div>
-
 
 <div class="gallery-item" onclick="openPhoto('IMG_002.jpg')">
 
-    <img src="IMG_002.jpg" alt="THOR Security">
+```
+<img
+    src="IMG_002.jpg"
+    alt="THOR Security"
+    loading="lazy"
+    decoding="async">
 
-    <div class="gallery-overlay">
-        <span>+</span>
-    </div>
+<div class="gallery-overlay">
+    <span>+</span>
+</div>
+```
 
 </div>
-
 
 <div class="gallery-item" onclick="openPhoto('IMG_003.jpg')">
 
-    <img src="IMG_003.jpg" alt="THOR Security">
+```
+<img
+    src="IMG_003.jpg"
+    alt="THOR Security"
+    loading="lazy"
+    decoding="async">
 
-    <div class="gallery-overlay">
-        <span>+</span>
-    </div>
+<div class="gallery-overlay">
+    <span>+</span>
+</div>
+```
 
 </div>
-
 
 <div class="gallery-item" onclick="openPhoto('IMG_004.jpg')">
 
-    <img src="IMG_004.jpg" alt="THOR Security">
+```
+<img
+    src="IMG_004.jpg"
+    alt="THOR Security"
+    loading="lazy"
+    decoding="async">
 
-    <div class="gallery-overlay">
-        <span>+</span>
-    </div>
+<div class="gallery-overlay">
+    <span>+</span>
+</div>
+```
 
 </div>
-
 
 <div class="gallery-item" onclick="openPhoto('IMG_005.jpg')">
 
-    <img src="IMG_005.jpg" alt="THOR Security">
+```
+<img
+    src="IMG_005.jpg"
+    alt="THOR Security"
+    loading="lazy"
+    decoding="async">
 
-    <div class="gallery-overlay">
-        <span>+</span>
-    </div>
+<div class="gallery-overlay">
+    <span>+</span>
+</div>
+```
 
 </div>
-
 
 <div class="gallery-item" onclick="openPhoto('IMG_006.jpg')">
 
-    <img src="IMG_006.jpg" alt="THOR Security">
+```
+<img
+    src="IMG_006.jpg"
+    alt="THOR Security"
+    loading="lazy"
+    decoding="async">
 
-    <div class="gallery-overlay">
-        <span>+</span>
-    </div>
+<div class="gallery-overlay">
+    <span>+</span>
+</div>
+```
 
 </div>
-
 
 <div class="gallery-item" onclick="openPhoto('IMG_007.jpg')">
 
-    <img src="IMG_007.jpg" alt="THOR Security">
+```
+<img
+    src="IMG_007.jpg"
+    alt="THOR Security"
+    loading="lazy"
+    decoding="async">
 
-    <div class="gallery-overlay">
-        <span>+</span>
-    </div>
+<div class="gallery-overlay">
+    <span>+</span>
+</div>
+```
 
 </div>
-
 
 <div class="gallery-item" onclick="openPhoto('IMG_008.jpg')">
 
-    <img src="IMG_008.jpg" alt="THOR Security">
+```
+<img
+    src="IMG_008.jpg"
+    alt="THOR Security"
+    loading="lazy"
+    decoding="async">
 
-    <div class="gallery-overlay">
-        <span>+</span>
-    </div>
+<div class="gallery-overlay">
+    <span>+</span>
+</div>
+```
 
 </div>
-
 
 <div class="gallery-item" onclick="openPhoto('IMG_009.jpg')">
 
-    <img src="IMG_009.jpg" alt="THOR Security">
+```
+<img
+    src="IMG_009.jpg"
+    alt="THOR Security"
+    loading="lazy"
+    decoding="async">
 
-    <div class="gallery-overlay">
-        <span>+</span>
-    </div>
+<div class="gallery-overlay">
+    <span>+</span>
+</div>
+```
 
 </div>
-
 
 <div class="gallery-item" onclick="openPhoto('IMG_010.jpg')">
 
-    <img src="IMG_010.jpg" alt="THOR Security">
+```
+<img
+    src="IMG_010.jpg"
+    alt="THOR Security"
+    loading="lazy"
+    decoding="async">
 
-    <div class="gallery-overlay">
-        <span>+</span>
-    </div>
+<div class="gallery-overlay">
+    <span>+</span>
+</div>
+```
 
 </div>
-
 
 </div>
 
 </section>
-
-
 
 <!-- =========================
      PHOTO MODAL
@@ -1263,20 +1442,20 @@ footer {
     id="photoModal"
     onclick="closePhoto()">
 
-    <span
-        class="close-modal"
-        onclick="closePhoto()">
-        ×
-    </span>
+```
+<span
+    class="close-modal"
+    onclick="closePhoto()">
+    ×
+</span>
 
-    <img
-        id="modalImage"
-        src=""
-        alt="THOR Security">
+<img
+    id="modalImage"
+    src=""
+    alt="THOR Security">
+```
 
 </div>
-
-
 
 <!-- =========================
      CONTACT
@@ -1290,122 +1469,112 @@ footer {
     Կապ մեզ հետ
 </h2>
 
-
 <div class="contact-info">
 
+<div class="contact-item">
+
+```
+<div class="contact-icon">
+    📞
+</div>
+
+<h3 data-key="phoneTitle">
+    Հեռախոս
+</h3>
+
+<a href="tel:+37477010057">
+    +374 77 010057
+</a>
+```
+
+</div>
 
 <div class="contact-item">
 
-    <div class="contact-icon">
-        📞
-    </div>
-
-    <h3 data-key="phoneTitle">
-        Հեռախոս
-    </h3>
-
-    <a href="tel:+37477010057">
-        +374 77 010057
-    </a>
-
+```
+<div class="contact-icon">
+    📧
 </div>
 
+<h3>
+    E-mail
+</h3>
+
+<a href="mailto:thorscrt@gmail.com">
+    thorscrt@gmail.com
+</a>
+```
+
+</div>
 
 <div class="contact-item">
 
-    <div class="contact-icon">
-        📧
-    </div>
-
-    <h3>
-        E-mail
-    </h3>
-
-    <a href="mailto:thorscrt@gmail.com">
-        thorscrt@gmail.com
-    </a>
-
+```
+<div class="contact-icon">
+    📍
 </div>
 
+<h3 data-key="addressTitle">
+    Հասցե
+</h3>
+
+<span>
+    Տիգրան Մեծ 61
+</span>
+```
+
+</div>
 
 <div class="contact-item">
 
-    <div class="contact-icon">
-        📍
-    </div>
+```
+<div class="contact-icon">
+    💬
+</div>
 
-    <h3 data-key="addressTitle">
-        Հասցե
-    </h3>
+<h3>
+    WhatsApp / Viber
+</h3>
 
-    <span>
-        Տիգրան Մեծ 61
-    </span>
+<a href="tel:+37477010057">
+    +374 77 010057
+</a>
+```
 
 </div>
 
-
-<div class="contact-item">
-
-    <div class="contact-icon">
-        💬
-    </div>
-
-    <h3>
-        WhatsApp / Viber
-    </h3>
-
-    <a href="tel:+37477010057">
-        +374 77 010057
-    </a>
-
 </div>
 
-
-</div>
-
-
-<p
-    data-key="contactText">
+<p data-key="contactText">
     Ձեր անվտանգությունը մեր առաջնահերթությունն է։
 </p>
 
-
 <div class="social-links">
 
+<a
+ class="social-link"
+ href="https://www.facebook.com/thorarmenia/about"
+ target="_blank"
+ rel="noopener">
+Facebook </a>
 
 <a
-    class="social-link"
-    href="https://www.facebook.com/thorarmenia/about"
-    target="_blank"
-    rel="noopener">
-    Facebook
-</a>
-
+ class="social-link"
+ href="https://www.instagram.com/thorsecurityarmenia/"
+ target="_blank"
+ rel="noopener">
+Instagram </a>
 
 <a
-    class="social-link"
-    href="https://www.instagram.com/thorsecurityarmenia/"
-    target="_blank"
-    rel="noopener">
-    Instagram
-</a>
-
-
-<a
-    class="social-link"
-    href="https://wa.me/37477010057"
-    target="_blank"
-    rel="noopener">
-    WhatsApp
-</a>
-
+ class="social-link"
+ href="https://wa.me/37477010057"
+ target="_blank"
+ rel="noopener">
+WhatsApp </a>
 
 </div>
 
 </section>
-
-
 
 <!-- =========================
      FOOTER
@@ -1413,11 +1582,11 @@ footer {
 
 <footer>
 
-    © 2026 THOR Security
+```
+© 2026 THOR Security
+```
 
 </footer>
-
-
 
 <script>
 
@@ -1449,10 +1618,6 @@ function closePhoto() {
 }
 
 
-/* =========================
-   ESC TO CLOSE PHOTO
-========================= */
-
 document.addEventListener(
     "keydown",
     function(event) {
@@ -1467,13 +1632,11 @@ document.addEventListener(
 );
 
 
-
 /* =========================
    LANGUAGES
 ========================= */
 
 const translations = {
-
 
 hy: {
 
@@ -1756,7 +1919,6 @@ contactText:
 };
 
 
-
 /* =========================
    CHANGE LANGUAGE
 ========================= */
@@ -1824,7 +1986,6 @@ function setLanguage(language) {
 ========================= */
 
 setLanguage("hy");
-
 
 </script>
 
