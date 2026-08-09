@@ -1,2312 +1,425 @@
 <!DOCTYPE html>
-
 <html lang="hy">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>THOR Security</title>
 
 <style>
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    color: #111;
-    background: #fff;
-}
-
-
-/* =========================
-   HERO
-========================= */
-
-.hero {
-    position: relative;
-    min-height: 600px;
-
-    background-image:
-        linear-gradient(
-            rgba(0, 0, 0, 0.42),
-            rgba(0, 0, 0, 0.42)
-        ),
-        url("thor-bg.jpg");
-
-    background-size: cover;
-    background-position: center;
-
-    color: white;
-    overflow: hidden;
-}
-
-
-/* =========================
-   LOGO
-========================= */
-
-.logo {
-    position: absolute;
-
-    top: 30px;
-    left: 35px;
-
-    width: 130px;
-    height: auto;
-
-    z-index: 20;
-}
-
-
-/* =========================
-   MENU
-========================= */
-
-nav {
-    position: absolute;
-
-    top: 32px;
-    right: 35px;
-
-    display: flex;
-    align-items: center;
-
-    gap: 25px;
-
-    z-index: 20;
-}
-
-nav a {
-    color: white;
-
-    text-decoration: none;
-
-    font-size: 16px;
-    font-weight: 500;
-
-    transition: 0.3s;
-}
-
-nav a:hover {
-    color: #c9a227;
-}
-
-
-/* =========================
-   LANGUAGE DROPDOWN
-========================= */
-
-.language-selector {
-    position: relative;
-}
-
-.language-current {
-    display: flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-    padding: 7px 10px;
-
-    background: rgba(0,0,0,0.28);
-
-    border: 1px solid rgba(255,255,255,0.65);
-
-    border-radius: 5px;
-
-    color: white;
-
-    cursor: pointer;
-
-    font-size: 13px;
-
-    transition: 0.3s;
-}
-
-.language-current:hover {
-    background: rgba(201,162,39,0.9);
-
-    border-color: #c9a227;
-}
-
-.language-arrow {
-    font-size: 10px;
-
-    transition: transform 0.25s ease;
-}
-
-.language-selector.open .language-arrow {
-    transform: rotate(180deg);
-}
-
-
-.language-menu {
-    position: absolute;
-
-    top: calc(100% + 7px);
-
-    right: 0;
-
-    min-width: 130px;
-
-    background: rgba(20,20,20,0.97);
-
-    border: 1px solid rgba(201,162,39,0.55);
-
-    border-radius: 6px;
-
-    padding: 5px;
-
-    box-shadow:
-        0 10px 25px rgba(0,0,0,0.35);
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    transform: translateY(-5px);
-
-    transition:
-        opacity 0.2s ease,
-        transform 0.2s ease,
-        visibility 0.2s ease;
-}
-
-.language-selector.open .language-menu {
-    opacity: 1;
-
-    visibility: visible;
-
-    transform: translateY(0);
-}
-
-
-.language-option {
-    width: 100%;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-    border: none;
-
-    background: transparent;
-
-    color: white;
-
-    padding: 9px 10px;
-
-    border-radius: 4px;
-
-    cursor: pointer;
-
-    font-size: 13px;
-
-    text-align: left;
-
-    transition: 0.2s;
-}
-
-.language-option:hover {
-    background: #c9a227;
-
-    color: white;
-}
-
-.language-option.selected {
-    color: #c9a227;
-}
-
-.language-option.selected:hover {
-    color: white;
-}
-
-
-/* =========================
-   HERO CENTER
-========================= */
-
-.hero-center {
-    position: absolute;
-
-    left: 50%;
-    bottom: 55px;
-
-    transform: translateX(-50%);
-
-    width: 90%;
-    max-width: 900px;
-
-    text-align: center;
-
-    z-index: 10;
-}
-
-.hero-center h1 {
-    font-size: 58px;
-
-    letter-spacing: 2px;
-
-    margin-bottom: 15px;
-
-    color: #c9a227;
-}
-
-.hero-center p {
-    font-size: 21px;
-
-    line-height: 1.6;
-
-    color: #fff;
-}
-
-
-/* =========================
-   SECTION TITLES
-========================= */
-
-.section-title {
-    position: relative;
-
-    display: inline-block;
-
-    font-size: 38px;
-
-    font-weight: 700;
-
-    padding-left: 18px;
-
-    margin-bottom: 35px;
-
-    letter-spacing: 0.5px;
-
-    text-align: left;
-}
-
-.section-title::before {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    top: 5px;
-
-    width: 4px;
-    height: 38px;
-
-    background: #c9a227;
-
-    border-radius: 2px;
-}
-
-
-/* =========================
-   SERVICES
-========================= */
-
-.services {
-    background: white;
-
-    padding: 80px 40px 90px;
-
-    text-align: center;
-}
-
-.services-intro {
-    font-size: 18px;
-
-    color: #555;
-
-    margin-bottom: 45px;
-}
-
-.service-cards {
-    max-width: 1200px;
-
-    margin: 0 auto;
-
-    display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-
-    gap: 25px;
-}
-
-.service-card {
-    background: #f7f7f7;
-
-    padding: 35px 20px;
-
-    border-radius: 8px;
-
-    border: 1px solid #eeeeee;
-
-    transition: 0.3s;
-}
-
-.service-card:hover {
-    transform: translateY(-8px);
-
-    box-shadow:
-        0 10px 25px rgba(0,0,0,0.12);
-}
-
-.service-icon {
-    font-size: 42px;
-
-    margin-bottom: 20px;
-}
-
-.service-card h3 {
-    font-size: 20px;
-
-    margin-bottom: 15px;
-}
-
-.service-card p {
-    font-size: 15px;
-
-    line-height: 1.6;
-
-    color: #555;
-}
-
-
-/* =========================
-   ABOUT
-========================= */
-
-.about {
-    padding: 85px 40px;
-
-    background: #f5f5f5;
-
-    text-align: center;
-}
-
-.about-container {
-    max-width: 1100px;
-
-    margin: 0 auto;
-}
-
-.about-text {
-    max-width: 900px;
-
-    margin: 0 auto;
-
-    font-size: 18px;
-
-    line-height: 1.8;
-
-    color: #555;
-}
-
-
-/* =========================
-   ADVANTAGES
-========================= */
-
-.advantages {
-    padding: 85px 40px;
-
-    background: white;
-
-    text-align: center;
-}
-
-.advantages-grid {
-    max-width: 1100px;
-
-    margin: 45px auto 0;
-
-    display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-
-    gap: 25px;
-}
-
-.advantage-card {
-    padding: 30px 20px;
-
-    background: #f7f7f7;
-
-    border: 1px solid #eeeeee;
-
-    border-radius: 8px;
-
-    transition: 0.3s;
-}
-
-.advantage-card:hover {
-    transform: translateY(-7px);
-
-    box-shadow:
-        0 10px 25px rgba(0,0,0,0.10);
-}
-
-.advantage-icon {
-    font-size: 40px;
-
-    margin-bottom: 15px;
-}
-
-.advantage-card h3 {
-    font-size: 19px;
-
-    margin-bottom: 12px;
-}
-
-.advantage-card p {
-    font-size: 15px;
-
-    color: #666;
-
-    line-height: 1.6;
-}
-
-
-/* =========================
-   GALLERY
-========================= */
-
-.gallery {
-    padding: 85px 40px;
-
-    background: #f5f5f5;
-
-    text-align: center;
-}
-
-.gallery-grid {
-    max-width: 1200px;
-
-    margin: 10px auto 0;
-
-    display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 20px;
-}
-
-.gallery-item {
-    position: relative;
-
-    overflow: hidden;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    background: #ddd;
-
-    aspect-ratio: 16 / 10;
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 100%;
-
-    display: block;
-
-    object-fit: cover;
-
-    transition: transform 0.45s ease;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.05);
-}
-
-
-/* =========================
-   PHOTO MODAL
-========================= */
-
-.photo-modal {
-    display: none;
-
-    position: fixed;
-
-    inset: 0;
-
-    background: rgba(0,0,0,0.90);
-
-    z-index: 9999;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 30px;
-
-    cursor: pointer;
-}
-
-.photo-modal.active {
-    display: flex;
-}
-
-.photo-modal img {
-    max-width: 92%;
-    max-height: 88vh;
-
-    object-fit: contain;
-
-    border-radius: 5px;
-
-    cursor: default;
-}
-
-.close-modal {
-    position: absolute;
-
-    top: 18px;
-    right: 30px;
-
-    color: white;
-
-    font-size: 42px;
-
-    font-weight: 300;
-
-    cursor: pointer;
-
-    line-height: 1;
-
-    z-index: 10000;
-}
-
-
-/* =========================
-   CONTACT
-========================= */
-
-.contact {
-    padding: 85px 20px;
-
-    background: #111;
-
-    color: white;
-
-    text-align: center;
-}
-
-.contact .section-title {
-    color: white;
-}
-
-.contact-info {
-    max-width: 1000px;
-
-    margin: 30px auto 35px;
-
-    display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-
-    gap: 20px;
-}
-
-.contact-item {
-    padding: 25px 15px;
-
-    background: #1a1a1a;
-
-    border: 1px solid #292929;
-
-    border-radius: 8px;
-}
-
-.contact-icon {
-    font-size: 28px;
-
-    margin-bottom: 12px;
-}
-
-.contact-item h3 {
-    font-size: 17px;
-
-    margin-bottom: 8px;
-
-    color: #c9a227;
-}
-
-.contact-item a,
-.contact-item span {
-    color: #ddd;
-
-    text-decoration: none;
-
-    font-size: 15px;
-
-    line-height: 1.5;
-}
-
-.contact-item a:hover {
-    color: #c9a227;
-}
-
-
-/* =========================
-   SOCIAL NETWORKS
-========================= */
-
-.social-links {
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 15px;
-
-    margin-top: 20px;
-
-    flex-wrap: wrap;
-}
-
-.social-link {
-    display: inline-flex;
-
-    align-items: center;
-    justify-content: center;
-
-    min-width: 170px;
-
-    padding: 12px 20px;
-
-    border: 1px solid #444;
-
-    border-radius: 5px;
-
-    color: white;
-
-    text-decoration: none;
-
-    transition: 0.3s;
-}
-
-.social-link:hover {
-    background: #c9a227;
-
-    border-color: #c9a227;
-
-    color: white;
-}
-
-
-/* =========================
-   BUTTON
-========================= */
-
-.button {
-    display: inline-block;
-
-    padding: 13px 30px;
-
-    background: #c9a227;
-
-    color: white;
-
-    text-decoration: none;
-
-    border-radius: 4px;
-
-    font-size: 16px;
-
-    font-weight: 600;
-
-    transition: 0.3s;
-}
-
-.button:hover {
-    background: #a98618;
-
-    transform: translateY(-2px);
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-footer {
-    background: #080808;
-
-    color: #777;
-
-    text-align: center;
-
-    padding: 20px;
-
-    font-size: 14px;
-}
-
-
-/* =========================
-   TABLET
-========================= */
-
-@media (max-width: 1100px) {
-
-    nav {
-        gap: 15px;
-    }
-
-    nav a {
-        font-size: 14px;
-    }
-
-    .service-cards {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .advantages-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .contact-info {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 700px) {
-
-    .hero {
-        min-height: 520px;
-
-        height: 65vh;
-
-        max-height: 620px;
-
-        background-size: cover;
-
-        background-position: center center;
-
-        overflow: hidden;
-    }
-
-
-    .hero::before {
-        content: "";
-
-        position: absolute;
-
-        inset: -5%;
-
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;color:#111;background:#fff}
+
+/* HERO */
+.hero{
+    position:relative;
+    min-height:600px;
+    background-image:linear-gradient(rgba(0,0,0,.42),rgba(0,0,0,.42)),url("thor-bg.jpg");
+    background-size:cover;
+    background-position:center;
+    color:#fff;
+    overflow:hidden;
+}
+.logo{position:absolute;top:30px;left:35px;width:130px;height:auto;z-index:20}
+
+/* MENU */
+nav{
+    position:absolute;top:32px;right:35px;
+    display:flex;align-items:center;gap:25px;z-index:20
+}
+nav a{color:#fff;text-decoration:none;font-size:16px;font-weight:500;transition:.3s}
+nav a:hover{color:#c9a227}
+
+/* LANGUAGE DROPDOWN */
+.language-selector{position:relative}
+.language-current{
+    display:flex;align-items:center;gap:7px;
+    padding:7px 10px;background:rgba(0,0,0,.28);
+    border:1px solid rgba(255,255,255,.65);border-radius:5px;
+    color:#fff;cursor:pointer;font-size:13px;transition:.3s
+}
+.language-current:hover{background:rgba(201,162,39,.9);border-color:#c9a227}
+.language-arrow{font-size:10px;transition:transform .25s}
+.language-selector.open .language-arrow{transform:rotate(180deg)}
+.language-menu{
+    position:absolute;top:calc(100% + 7px);right:0;min-width:130px;
+    background:rgba(20,20,20,.97);border:1px solid rgba(201,162,39,.55);
+    border-radius:6px;padding:5px;box-shadow:0 10px 25px rgba(0,0,0,.35);
+    opacity:0;visibility:hidden;transform:translateY(-5px);
+    transition:opacity .2s,transform .2s,visibility .2s
+}
+.language-selector.open .language-menu{opacity:1;visibility:visible;transform:translateY(0)}
+.language-option{
+    width:100%;display:flex;align-items:center;gap:9px;border:0;
+    background:transparent;color:#fff;padding:9px 10px;border-radius:4px;
+    cursor:pointer;font-size:13px;text-align:left;transition:.2s
+}
+.language-option:hover{background:#c9a227}
+.language-option.selected{color:#c9a227}
+.language-option.selected:hover{color:#fff}
+
+/* HERO CENTER */
+.hero-center{
+    position:absolute;left:50%;bottom:55px;transform:translateX(-50%);
+    width:90%;max-width:900px;text-align:center;z-index:10
+}
+.hero-center h1{font-size:58px;letter-spacing:2px;margin-bottom:15px;color:#c9a227}
+.hero-center p{font-size:21px;line-height:1.6;color:#fff}
+
+/* TITLES */
+.section-title{
+    position:relative;display:inline-block;font-size:38px;font-weight:700;
+    padding-left:18px;margin-bottom:35px;letter-spacing:.5px;text-align:left
+}
+.section-title:before{
+    content:"";position:absolute;left:0;top:5px;width:4px;height:38px;
+    background:#c9a227;border-radius:2px
+}
+
+/* SERVICES */
+.services{background:#fff;padding:80px 40px 90px;text-align:center}
+.services-intro{font-size:18px;color:#555;margin-bottom:45px}
+.service-cards{
+    max-width:1200px;margin:0 auto;display:grid;
+    grid-template-columns:repeat(4,1fr);gap:25px
+}
+.service-card{
+    background:#f7f7f7;padding:35px 20px;border-radius:8px;
+    border:1px solid #eee;transition:.3s
+}
+.service-card:hover{transform:translateY(-8px);box-shadow:0 10px 25px rgba(0,0,0,.12)}
+.service-icon{font-size:42px;margin-bottom:20px}
+.service-card h3{font-size:20px;margin-bottom:15px}
+.service-card p{font-size:15px;line-height:1.6;color:#555}
+
+/* ABOUT */
+.about{padding:85px 40px;background:#f5f5f5;text-align:center}
+.about-container{max-width:1100px;margin:0 auto}
+.about-text{max-width:900px;margin:0 auto;font-size:18px;line-height:1.8;color:#555}
+
+/* ADVANTAGES */
+.advantages{padding:85px 40px;background:#fff;text-align:center}
+.advantages-grid{
+    max-width:1100px;margin:45px auto 0;display:grid;
+    grid-template-columns:repeat(4,1fr);gap:25px
+}
+.advantage-card{
+    padding:30px 20px;background:#f7f7f7;border:1px solid #eee;
+    border-radius:8px;transition:.3s
+}
+.advantage-card:hover{transform:translateY(-7px);box-shadow:0 10px 25px rgba(0,0,0,.10)}
+.advantage-icon{font-size:40px;margin-bottom:15px}
+.advantage-card h3{font-size:19px;margin-bottom:12px}
+.advantage-card p{font-size:15px;color:#666;line-height:1.6}
+
+/* GALLERY */
+.gallery{padding:85px 40px;background:#f5f5f5;text-align:center}
+.gallery-grid{
+    max-width:1200px;margin:10px auto 0;display:grid;
+    grid-template-columns:repeat(3,1fr);gap:20px
+}
+.gallery-item{
+    overflow:hidden;border-radius:8px;cursor:pointer;background:#ddd;
+    aspect-ratio:16/10
+}
+.gallery-item img{
+    width:100%;height:100%;display:block;object-fit:cover;
+    transition:transform .45s ease
+}
+.gallery-item:hover img{transform:scale(1.05)}
+
+/* PHOTO MODAL */
+.photo-modal{
+    display:none;position:fixed;inset:0;background:rgba(0,0,0,.90);
+    z-index:9999;align-items:center;justify-content:center;
+    padding:30px;cursor:pointer
+}
+.photo-modal.active{display:flex}
+.photo-modal img{max-width:92%;max-height:88vh;object-fit:contain;border-radius:5px;cursor:default}
+.close-modal{
+    position:absolute;top:18px;right:30px;color:#fff;font-size:42px;
+    font-weight:300;cursor:pointer;line-height:1;z-index:10000
+}
+
+/* CONTACT */
+.contact{padding:85px 20px;background:#111;color:#fff;text-align:center}
+.contact .section-title{color:#fff}
+.contact-info{
+    max-width:1000px;margin:30px auto 35px;display:grid;
+    grid-template-columns:repeat(4,1fr);gap:20px
+}
+.contact-item{padding:25px 15px;background:#1a1a1a;border:1px solid #292929;border-radius:8px}
+.contact-icon{font-size:28px;margin-bottom:12px}
+.contact-item h3{font-size:17px;margin-bottom:8px;color:#c9a227}
+.contact-item a,.contact-item span{color:#ddd;text-decoration:none;font-size:15px;line-height:1.5}
+.contact-item a:hover{color:#c9a227}
+.social-links{
+    display:flex;justify-content:center;align-items:center;gap:15px;
+    margin-top:20px;flex-wrap:wrap
+}
+.social-link{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:170px;padding:12px 20px;border:1px solid #444;
+    border-radius:5px;color:#fff;text-decoration:none;transition:.3s
+}
+.social-link:hover{background:#c9a227;border-color:#c9a227}
+.button{
+    display:inline-block;padding:13px 30px;background:#c9a227;color:#fff;
+    text-decoration:none;border-radius:4px;font-size:16px;font-weight:600;transition:.3s
+}
+.button:hover{background:#a98618;transform:translateY(-2px)}
+footer{background:#080808;color:#777;text-align:center;padding:20px;font-size:14px}
+
+/* TABLET */
+@media(max-width:1100px){
+    nav{gap:15px}
+    nav a{font-size:14px}
+    .service-cards,.advantages-grid{grid-template-columns:repeat(2,1fr)}
+    .gallery-grid{grid-template-columns:repeat(2,1fr)}
+    .contact-info{grid-template-columns:repeat(2,1fr)}
+}
+
+/* MOBILE */
+@media(max-width:700px){
+    .hero{
+        min-height:0;height:72vh;max-height:680px;
         background-image:
-            url("thor-bg.jpg");
-
-        background-size: cover;
-
-        background-position: center center;
-
-        animation:
-            heroZoom 12s ease-in-out infinite alternate;
-
-        z-index: 0;
+            linear-gradient(rgba(0,0,0,.28),rgba(0,0,0,.48)),
+            url("thor-mobile.jpg");
+        background-size:cover;
+        background-position:center center;
     }
 
-
-    .hero::after {
-        content: "";
-
-        position: absolute;
-
-        inset: 0;
-
-        background:
-            linear-gradient(
-                to bottom,
-                rgba(0,0,0,0.30),
-                rgba(0,0,0,0.48)
-            );
-
-        z-index: 1;
+    .logo{width:85px;top:18px;left:18px}
+    nav{
+        top:18px;right:12px;flex-direction:column;
+        align-items:flex-end;gap:7px
     }
+    nav a{font-size:13px}
+    .language-current{padding:6px 9px;font-size:12px}
+    .language-menu{min-width:125px}
+    .language-option{padding:8px 9px;font-size:12px}
 
-
-    @keyframes heroZoom {
-
-        from {
-            transform: scale(1);
-        }
-
-        to {
-            transform: scale(1.08);
-        }
-
+    .hero-center{
+        left:50%;bottom:30px;width:90%;transform:translateX(-50%)
     }
-
-
-    .logo {
-        width: 85px;
-
-        max-width: 85px;
-
-        top: 18px;
-
-        left: 18px;
-
-        height: auto;
-
-        z-index: 20;
-    }
-
-
-    nav {
-        top: 18px;
-
-        right: 12px;
-
-        flex-direction: column;
-
-        align-items: flex-end;
-
-        gap: 7px;
-
-        z-index: 20;
-    }
-
-    nav a {
-        font-size: 13px;
-    }
-
-
-    .language-current {
-        padding: 6px 9px;
-
-        font-size: 12px;
-    }
-
-    .language-menu {
-        min-width: 125px;
-    }
-
-    .language-option {
-        padding: 8px 9px;
-
-        font-size: 12px;
-    }
-
-
-    .hero-center {
-        left: 50%;
-
-        bottom: 35px;
-
-        width: 90%;
-
-        transform: translateX(-50%);
-
-        z-index: 10;
-    }
-
-    .hero-center h1 {
-        font-size: 34px;
-
-        letter-spacing: 1px;
-
-        margin-bottom: 10px;
-    }
-
-    .hero-center p {
-        font-size: 15px;
-
-        line-height: 1.5;
-    }
-
-
-    .services {
-        padding: 60px 20px;
-    }
-
-    .section-title {
-        font-size: 30px;
-
-        padding-left: 14px;
-
-        margin-bottom: 28px;
-    }
-
-    .section-title::before {
-        width: 3px;
-
-        height: 30px;
-
-        top: 3px;
-    }
-
-
-    .service-cards {
-        grid-template-columns: 1fr;
-    }
-
-
-    .about {
-        padding: 60px 20px;
-    }
-
-    .about-text {
-        font-size: 16px;
-
-        line-height: 1.7;
-    }
-
-
-    .advantages {
-        padding: 60px 20px;
-    }
-
-    .advantages-grid {
-        grid-template-columns: 1fr;
-    }
-
-
-    .gallery {
-        padding: 60px 20px;
-    }
-
-    .gallery-grid {
-        grid-template-columns: 1fr;
-
-        gap: 15px;
-    }
-
-    .gallery-item {
-        aspect-ratio: 16 / 10;
-    }
-
-
-    .contact {
-        padding: 60px 20px;
-    }
-
-    .contact-info {
-        grid-template-columns: 1fr;
-    }
-
-    .social-links {
-        flex-direction: column;
-
-        align-items: center;
-    }
-
-    .social-link {
-        width: 220px;
-    }
-
-
-    .photo-modal {
-        padding: 15px;
-    }
-
-    .photo-modal img {
-        max-width: 96%;
-
-        max-height: 82vh;
-    }
-
-    .close-modal {
-        top: 15px;
-
-        right: 18px;
-
-        font-size: 38px;
-    }
-
+    .hero-center h1{font-size:34px;letter-spacing:1px;margin-bottom:10px}
+    .hero-center p{font-size:15px;line-height:1.5}
+
+    .services{padding:60px 20px}
+    .section-title{font-size:30px;padding-left:14px;margin-bottom:28px}
+    .section-title:before{width:3px;height:30px;top:3px}
+    .service-cards,.advantages-grid,.gallery-grid,.contact-info{grid-template-columns:1fr}
+
+    .about,.advantages,.gallery,.contact{padding:60px 20px}
+    .about-text{font-size:16px;line-height:1.7}
+    .gallery-grid{gap:15px}
+    .gallery-item{aspect-ratio:16/10}
+
+    .social-links{flex-direction:column;align-items:center}
+    .social-link{width:220px}
+
+    .photo-modal{padding:15px}
+    .photo-modal img{max-width:96%;max-height:82vh}
+    .close-modal{top:15px;right:18px;font-size:38px}
 }
 
-
-/* =========================
-   VERY SMALL PHONES
-========================= */
-
-@media (max-width: 400px) {
-
-    .hero {
-        min-height: 480px;
-
-        height: 62vh;
-
-        max-height: 560px;
-    }
-
-    .logo {
-        width: 75px;
-
-        top: 15px;
-
-        left: 15px;
-    }
-
-    nav {
-        right: 10px;
-
-        top: 15px;
-    }
-
-    nav a {
-        font-size: 12px;
-    }
-
-    .hero-center h1 {
-        font-size: 30px;
-    }
-
-    .hero-center p {
-        font-size: 14px;
-    }
-
+/* VERY SMALL PHONES */
+@media(max-width:400px){
+    .hero{height:68vh;max-height:580px}
+    .logo{width:75px;top:15px;left:15px}
+    nav{right:10px;top:15px}
+    nav a{font-size:12px}
+    .hero-center h1{font-size:30px}
+    .hero-center p{font-size:14px}
 }
-
 </style>
-
 </head>
 
 <body>
 
-<!-- =========================
-     HERO
-========================= -->
-
 <section class="hero" id="home">
+    <img class="logo" src="IMG_8160.png" alt="THOR Security">
 
-```
-<img
-    class="logo"
-    src="IMG_8160.png"
-    alt="THOR Security"
->
+    <nav>
+        <a href="#home" data-key="home">Գլխավոր</a>
+        <a href="#services" data-key="servicesMenu">Ծառայություններ</a>
+        <a href="#about" data-key="aboutMenu">Մեր մասին</a>
+        <a href="#advantages" data-key="advantagesMenu">Առավելություններ</a>
+        <a href="#gallery" data-key="galleryMenu">Նկարներ</a>
+        <a href="#contact" data-key="contactMenu">Հետադարձ կապ</a>
 
-
-<nav>
-
-    <a href="#home" data-key="home">
-        Գլխավոր
-    </a>
-
-    <a href="#services" data-key="servicesMenu">
-        Ծառայություններ
-    </a>
-
-    <a href="#about" data-key="aboutMenu">
-        Մեր մասին
-    </a>
-
-    <a href="#advantages" data-key="advantagesMenu">
-        Առավելություններ
-    </a>
-
-    <a href="#gallery" data-key="galleryMenu">
-        Նկարներ
-    </a>
-
-    <a href="#contact" data-key="contactMenu">
-        Հետադարձ կապ
-    </a>
-
-
-    <!-- LANGUAGE SELECTOR -->
-
-    <div class="language-selector" id="languageSelector">
-
-        <button
-            class="language-current"
-            id="languageCurrent"
-            type="button"
-            onclick="toggleLanguageMenu()"
-        >
-
-            <span id="currentFlag">🇦🇲</span>
-
-            <span id="currentLanguage">
-                Հայ
-            </span>
-
-            <span class="language-arrow">
-                ▼
-            </span>
-
-        </button>
-
-
-        <div class="language-menu">
-
-            <button
-                class="language-option selected"
-                data-language="hy"
-                onclick="setLanguage('hy')"
-                type="button"
-            >
-                🇦🇲 Հայ
+        <div class="language-selector" id="languageSelector">
+            <button class="language-current" type="button" onclick="toggleLanguageMenu()">
+                <span id="currentFlag">🇦🇲</span>
+                <span id="currentLanguage">Հայ</span>
+                <span class="language-arrow">▼</span>
             </button>
 
-
-            <button
-                class="language-option"
-                data-language="ru"
-                onclick="setLanguage('ru')"
-                type="button"
-            >
-                🇷🇺 Рус
-            </button>
-
-
-            <button
-                class="language-option"
-                data-language="en"
-                onclick="setLanguage('en')"
-                type="button"
-            >
-                🇬🇧 ENG
-            </button>
-
+            <div class="language-menu">
+                <button class="language-option selected" data-language="hy" onclick="setLanguage('hy')" type="button">🇦🇲 Հայ</button>
+                <button class="language-option" data-language="ru" onclick="setLanguage('ru')" type="button">🇷🇺 Рус</button>
+                <button class="language-option" data-language="en" onclick="setLanguage('en')" type="button">🇬🇧 ENG</button>
+            </div>
         </div>
+    </nav>
 
+    <div class="hero-center">
+        <h1>THOR Security</h1>
+        <p data-key="heroText">Ժամանակակից և հուսալի անվտանգության լուծումներ Ձեր, Ձեր տան և Ձեր բիզնեսի համար։</p>
     </div>
-
-</nav>
-
-
-<div class="hero-center">
-
-    <h1>
-        THOR Security
-    </h1>
-
-    <p data-key="heroText">
-        Ժամանակակից և հուսալի անվտանգության լուծումներ
-        Ձեր, Ձեր տան և Ձեր բիզնեսի համար։
-    </p>
-
-</div>
-```
-
 </section>
-
-<!-- =========================
-     SERVICES
-========================= -->
 
 <section class="services" id="services">
+    <h2 class="section-title" data-key="servicesTitle">Մեր ծառայությունները</h2>
+    <p class="services-intro" data-key="servicesIntro">THOR համակարգը առաջարկում է անվտանգության ժամանակակից լուծումներ։</p>
 
-```
-<h2 class="section-title" data-key="servicesTitle">
-    Մեր ծառայությունները
-</h2>
-
-<p class="services-intro" data-key="servicesIntro">
-    THOR համակարգը առաջարկում է անվտանգության
-    ժամանակակից լուծումներ։
-</p>
-
-
-<div class="service-cards">
-
-    <div class="service-card">
-
-        <div class="service-icon">
-            🛡️
-        </div>
-
-        <h3 data-key="service1Title">
-            Ֆիզիկական պահպանություն
-        </h3>
-
-        <p data-key="service1Text">
-            Մասնագիտական պահնորդական ծառայություններ
-            Ձեր և Ձեր գույքի անվտանգության համար։
-        </p>
-
+    <div class="service-cards">
+        <div class="service-card"><div class="service-icon">🛡️</div><h3 data-key="service1Title">Ֆիզիկական պահպանություն</h3><p data-key="service1Text">Մասնագիտական պահնորդական ծառայություններ Ձեր և Ձեր գույքի անվտանգության համար։</p></div>
+        <div class="service-card"><div class="service-icon">📹</div><h3 data-key="service2Title">Տեսահսկման համակարգեր</h3><p data-key="service2Text">Ժամանակակից տեսահսկման և անվտանգության համակարգերի տեղադրում և սպասարկում։</p></div>
+        <div class="service-card"><div class="service-icon">🚨</div><h3 data-key="service3Title">Արագ արձագանքման ծառայություն</h3><p data-key="service3Text">Արագ և արդյունավետ արձագանք վտանգավոր իրավիճակների դեպքում։</p></div>
+        <div class="service-card"><div class="service-icon">🏠</div><h3 data-key="service4Title">Բնակարանների և բիզնեսների պաշտպանություն</h3><p data-key="service4Text">Ձեր տան, բնակարանի և բիզնեսի համալիր անվտանգության ապահովում։</p></div>
     </div>
-
-
-    <div class="service-card">
-
-        <div class="service-icon">
-            📹
-        </div>
-
-        <h3 data-key="service2Title">
-            Տեսահսկման համակարգեր
-        </h3>
-
-        <p data-key="service2Text">
-            Ժամանակակից տեսահսկման և անվտանգության
-            համակարգերի տեղադրում և սպասարկում։
-        </p>
-
-    </div>
-
-
-    <div class="service-card">
-
-        <div class="service-icon">
-            🚨
-        </div>
-
-        <h3 data-key="service3Title">
-            Արագ արձագանքման ծառայություն
-        </h3>
-
-        <p data-key="service3Text">
-            Արագ և արդյունավետ արձագանք
-            վտանգավոր իրավիճակների դեպքում։
-        </p>
-
-    </div>
-
-
-    <div class="service-card">
-
-        <div class="service-icon">
-            🏠
-        </div>
-
-        <h3 data-key="service4Title">
-            Բնակարանների և բիզնեսների պաշտպանություն
-        </h3>
-
-        <p data-key="service4Text">
-            Ձեր տան, բնակարանի և բիզնեսի
-            համալիր անվտանգության ապահովում։
-        </p>
-
-    </div>
-
-</div>
-```
-
 </section>
-
-<!-- =========================
-     ABOUT
-========================= -->
 
 <section class="about" id="about">
-
-```
-<div class="about-container">
-
-    <h2 class="section-title" data-key="aboutTitle">
-        Մեր մասին
-    </h2>
-
-    <p class="about-text" data-key="aboutText">
-        THOR Security-ը անվտանգության ոլորտում
-        ժամանակակից և հուսալի լուծումներ առաջարկող
-        համակարգ է։ Մենք ձգտում ենք ապահովել մարդկանց,
-        բնակարանների, բիզնեսների և տարբեր օբյեկտների
-        անվտանգությունը՝ համատեղելով մասնագիտական
-        մոտեցումը և ժամանակակից տեխնոլոգիաները։
-    </p>
-
-</div>
-```
-
+    <div class="about-container">
+        <h2 class="section-title" data-key="aboutTitle">Մեր մասին</h2>
+        <p class="about-text" data-key="aboutText">THOR Security-ը անվտանգության ոլորտում ժամանակակից և հուսալի լուծումներ առաջարկող համակարգ է։ Մենք ձգտում ենք ապահովել մարդկանց, բնակարանների, բիզնեսների և տարբեր օբյեկտների անվտանգությունը՝ համատեղելով մասնագիտական մոտեցումը և ժամանակակից տեխնոլոգիաները։</p>
+    </div>
 </section>
-
-<!-- =========================
-     ADVANTAGES
-========================= -->
 
 <section class="advantages" id="advantages">
-
-```
-<h2 class="section-title" data-key="advantagesTitle">
-    Ինչու THOR
-</h2>
-
-
-<div class="advantages-grid">
-
-    <div class="advantage-card">
-
-        <div class="advantage-icon">
-            🛡️
-        </div>
-
-        <h3 data-key="advantage1Title">
-            Հուսալիություն
-        </h3>
-
-        <p data-key="advantage1Text">
-            Ձեր անվտանգությունը մեր առաջնահերթությունն է։
-        </p>
-
+    <h2 class="section-title" data-key="advantagesTitle">Ինչու THOR</h2>
+    <div class="advantages-grid">
+        <div class="advantage-card"><div class="advantage-icon">🛡️</div><h3 data-key="advantage1Title">Հուսալիություն</h3><p data-key="advantage1Text">Ձեր անվտանգությունը մեր առաջնահերթությունն է։</p></div>
+        <div class="advantage-card"><div class="advantage-icon">⚡</div><h3 data-key="advantage2Title">Արագ արձագանք</h3><p data-key="advantage2Text">Արագ և արդյունավետ գործողություններ անհրաժեշտ պահին։</p></div>
+        <div class="advantage-card"><div class="advantage-icon">📹</div><h3 data-key="advantage3Title">Ժամանակակից տեխնոլոգիաներ</h3><p data-key="advantage3Text">Ժամանակակից անվտանգության և տեսահսկման լուծումներ։</p></div>
+        <div class="advantage-card"><div class="advantage-icon">🤝</div><h3 data-key="advantage4Title">Պրոֆեսիոնալ մոտեցում</h3><p data-key="advantage4Text">Անհատական մոտեցում յուրաքանչյուր հաճախորդի և օբյեկտի նկատմամբ։</p></div>
     </div>
-
-
-    <div class="advantage-card">
-
-        <div class="advantage-icon">
-            ⚡
-        </div>
-
-        <h3 data-key="advantage2Title">
-            Արագ արձագանք
-        </h3>
-
-        <p data-key="advantage2Text">
-            Արագ և արդյունավետ գործողություններ
-            անհրաժեշտ պահին։
-        </p>
-
-    </div>
-
-
-    <div class="advantage-card">
-
-        <div class="advantage-icon">
-            📹
-        </div>
-
-        <h3 data-key="advantage3Title">
-            Ժամանակակից տեխնոլոգիաներ
-        </h3>
-
-        <p data-key="advantage3Text">
-            Ժամանակակից անվտանգության և
-            տեսահսկման լուծումներ։
-        </p>
-
-    </div>
-
-
-    <div class="advantage-card">
-
-        <div class="advantage-icon">
-            🤝
-        </div>
-
-        <h3 data-key="advantage4Title">
-            Պրոֆեսիոնալ մոտեցում
-        </h3>
-
-        <p data-key="advantage4Text">
-            Անհատական մոտեցում յուրաքանչյուր
-            հաճախորդի և օբյեկտի նկատմամբ։
-        </p>
-
-    </div>
-
-</div>
-```
-
 </section>
-
-<!-- =========================
-     GALLERY
-========================= -->
 
 <section class="gallery" id="gallery">
-
-```
-<h2 class="section-title" data-key="galleryTitle">
-    Նկարներ
-</h2>
-
-
-<div class="gallery-grid">
-
-    <div class="gallery-item"
-         onclick="openPhoto('IMG_001.jpg')">
-
-        <img
-            src="IMG_001.jpg"
-            alt="THOR Security"
-            loading="lazy"
-        >
-
+    <h2 class="section-title" data-key="galleryTitle">Նկարներ</h2>
+    <div class="gallery-grid">
+        <div class="gallery-item" onclick="openPhoto('IMG_001.jpg')"><img src="IMG_001.jpg" alt="THOR Security" loading="lazy"></div>
+        <div class="gallery-item" onclick="openPhoto('IMG_002.jpg')"><img src="IMG_002.jpg" alt="THOR Security" loading="lazy"></div>
+        <div class="gallery-item" onclick="openPhoto('IMG_003.jpg')"><img src="IMG_003.jpg" alt="THOR Security" loading="lazy"></div>
+        <div class="gallery-item" onclick="openPhoto('IMG_004.jpg')"><img src="IMG_004.jpg" alt="THOR Security" loading="lazy"></div>
+        <div class="gallery-item" onclick="openPhoto('IMG_005.jpg')"><img src="IMG_005.jpg" alt="THOR Security" loading="lazy"></div>
+        <div class="gallery-item" onclick="openPhoto('IMG_006.jpg')"><img src="IMG_006.jpg" alt="THOR Security" loading="lazy"></div>
+        <div class="gallery-item" onclick="openPhoto('IMG_007.jpg')"><img src="IMG_007.jpg" alt="THOR Security" loading="lazy"></div>
+        <div class="gallery-item" onclick="openPhoto('IMG_008.jpg')"><img src="IMG_008.jpg" alt="THOR Security" loading="lazy"></div>
+        <div class="gallery-item" onclick="openPhoto('IMG_009.jpg')"><img src="IMG_009.jpg" alt="THOR Security" loading="lazy"></div>
+        <div class="gallery-item" onclick="openPhoto('IMG_010.jpg')"><img src="IMG_010.jpg" alt="THOR Security" loading="lazy"></div>
     </div>
-
-
-    <div class="gallery-item"
-         onclick="openPhoto('IMG_002.jpg')">
-
-        <img
-            src="IMG_002.jpg"
-            alt="THOR Security"
-            loading="lazy"
-        >
-
-    </div>
-
-
-    <div class="gallery-item"
-         onclick="openPhoto('IMG_003.jpg')">
-
-        <img
-            src="IMG_003.jpg"
-            alt="THOR Security"
-            loading="lazy"
-        >
-
-    </div>
-
-
-    <div class="gallery-item"
-         onclick="openPhoto('IMG_004.jpg')">
-
-        <img
-            src="IMG_004.jpg"
-            alt="THOR Security"
-            loading="lazy"
-        >
-
-    </div>
-
-
-    <div class="gallery-item"
-         onclick="openPhoto('IMG_005.jpg')">
-
-        <img
-            src="IMG_005.jpg"
-            alt="THOR Security"
-            loading="lazy"
-        >
-
-    </div>
-
-
-    <div class="gallery-item"
-         onclick="openPhoto('IMG_006.jpg')">
-
-        <img
-            src="IMG_006.jpg"
-            alt="THOR Security"
-            loading="lazy"
-        >
-
-    </div>
-
-
-    <div class="gallery-item"
-         onclick="openPhoto('IMG_007.jpg')">
-
-        <img
-            src="IMG_007.jpg"
-            alt="THOR Security"
-            loading="lazy"
-        >
-
-    </div>
-
-
-    <div class="gallery-item"
-         onclick="openPhoto('IMG_008.jpg')">
-
-        <img
-            src="IMG_008.jpg"
-            alt="THOR Security"
-            loading="lazy"
-        >
-
-    </div>
-
-
-    <div class="gallery-item"
-         onclick="openPhoto('IMG_009.jpg')">
-
-        <img
-            src="IMG_009.jpg"
-            alt="THOR Security"
-            loading="lazy"
-        >
-
-    </div>
-
-
-    <div class="gallery-item"
-         onclick="openPhoto('IMG_010.jpg')">
-
-        <img
-            src="IMG_010.jpg"
-            alt="THOR Security"
-            loading="lazy"
-        >
-
-    </div>
-
-</div>
-```
-
 </section>
 
-<!-- =========================
-     PHOTO MODAL
-========================= -->
-
-<div
-    class="photo-modal"
-    id="photoModal"
-    onclick="closePhoto(event)"
->
-
-```
-<span
-    class="close-modal"
-    onclick="closePhoto(event)"
->
-    ×
-</span>
-
-<img
-    id="modalImage"
-    src=""
-    alt="THOR Security"
-    onclick="event.stopPropagation()"
->
-```
-
+<div class="photo-modal" id="photoModal" onclick="closePhoto(event)">
+    <span class="close-modal" onclick="closePhoto(event)">×</span>
+    <img id="modalImage" src="" alt="THOR Security" onclick="event.stopPropagation()">
 </div>
-
-<!-- =========================
-     CONTACT
-========================= -->
 
 <section class="contact" id="contact">
+    <h2 class="section-title" data-key="contactTitle">Կապ մեզ հետ</h2>
 
-```
-<h2
-    class="section-title"
-    data-key="contactTitle"
->
-    Կապ մեզ հետ
-</h2>
-
-
-<div class="contact-info">
-
-
-    <div class="contact-item">
-
-        <div class="contact-icon">
-            📞
-        </div>
-
-        <h3 data-key="phoneTitle">
-            Հեռախոս
-        </h3>
-
-        <a href="tel:+37477010057">
-            +374 77 010057
-        </a>
-
+    <div class="contact-info">
+        <div class="contact-item"><div class="contact-icon">📞</div><h3 data-key="phoneTitle">Հեռախոս</h3><a href="tel:+37477010057">+374 77 010057</a></div>
+        <div class="contact-item"><div class="contact-icon">📧</div><h3>E-mail</h3><a href="mailto:thorscrt@gmail.com">thorscrt@gmail.com</a></div>
+        <div class="contact-item"><div class="contact-icon">📍</div><h3 data-key="addressTitle">Հասցե</h3><span>Տիգրան Մեծ 61</span></div>
+        <div class="contact-item"><div class="contact-icon">💬</div><h3>WhatsApp / Viber</h3><a href="tel:+37477010057">+374 77 010057</a></div>
     </div>
 
+    <p data-key="contactText" style="font-size:18px;color:#ddd;margin-bottom:25px">Ձեր անվտանգությունը մեր առաջնահերթությունն է։</p>
 
-    <div class="contact-item">
-
-        <div class="contact-icon">
-            📧
-        </div>
-
-        <h3>
-            E-mail
-        </h3>
-
-        <a href="mailto:thorscrt@gmail.com">
-            thorscrt@gmail.com
-        </a>
-
+    <div class="social-links">
+        <a class="social-link" href="https://www.facebook.com/thorarmenia/about" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a class="social-link" href="https://www.instagram.com/thorsecurityarmenia/" target="_blank" rel="noopener noreferrer">Instagram</a>
     </div>
-
-
-    <div class="contact-item">
-
-        <div class="contact-icon">
-            📍
-        </div>
-
-        <h3 data-key="addressTitle">
-            Հասցե
-        </h3>
-
-        <span>
-            Տիգրան Մեծ 61
-        </span>
-
-    </div>
-
-
-    <div class="contact-item">
-
-        <div class="contact-icon">
-            💬
-        </div>
-
-        <h3>
-            WhatsApp / Viber
-        </h3>
-
-        <a href="tel:+37477010057">
-            +374 77 010057
-        </a>
-
-    </div>
-
-</div>
-
-
-<p
-    data-key="contactText"
-    style="
-        font-size:18px;
-        color:#ddd;
-        margin-bottom:25px;
-    "
->
-    Ձեր անվտանգությունը մեր առաջնահերթությունն է։
-</p>
-
-
-<div class="social-links">
-
-    <a
-        class="social-link"
-        href="https://www.facebook.com/thorarmenia/about"
-        target="_blank"
-        rel="noopener noreferrer"
-    >
-        Facebook
-    </a>
-
-
-    <a
-        class="social-link"
-        href="https://www.instagram.com/thorsecurityarmenia/"
-        target="_blank"
-        rel="noopener noreferrer"
-    >
-        Instagram
-    </a>
-
-</div>
-```
-
 </section>
 
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-    © 2026 THOR Security
-</footer>
+<footer>© 2026 THOR Security</footer>
 
 <script>
-
-
-/* =========================
-   LANGUAGE DATA
-========================= */
-
-const translations = {
-
-
-    hy: {
-
-        home: "Գլխավոր",
-
-        servicesMenu: "Ծառայություններ",
-
-        aboutMenu: "Մեր մասին",
-
-        advantagesMenu: "Առավելություններ",
-
-        galleryMenu: "Նկարներ",
-
-        contactMenu: "Հետադարձ կապ",
-
-
-        heroText:
-        "Ժամանակակից և հուսալի անվտանգության լուծումներ Ձեր, Ձեր տան և Ձեր բիզնեսի համար։",
-
-
-        servicesTitle:
-        "Մեր ծառայությունները",
-
-        servicesIntro:
-        "THOR համակարգը առաջարկում է անվտանգության ժամանակակից լուծումներ։",
-
-
-        service1Title:
-        "Ֆիզիկական պահպանություն",
-
-        service1Text:
-        "Մասնագիտական պահնորդական ծառայություններ Ձեր և Ձեր գույքի անվտանգության համար։",
-
-
-        service2Title:
-        "Տեսահսկման համակարգեր",
-
-        service2Text:
-        "Ժամանակակից տեսահսկման և անվտանգության համակարգերի տեղադրում և սպասարկում։",
-
-
-        service3Title:
-        "Արագ արձագանքման ծառայություն",
-
-        service3Text:
-        "Արագ և արդյունավետ արձագանք վտանգավոր իրավիճակների դեպքում։",
-
-
-        service4Title:
-        "Բնակարանների և բիզնեսների պաշտպանություն",
-
-        service4Text:
-        "Ձեր տան, բնակարանի և բիզնեսի համալիր անվտանգության ապահովում։",
-
-
-        aboutTitle:
-        "Մեր մասին",
-
-        aboutText:
-        "THOR Security-ը անվտանգության ոլորտում ժամանակակից և հուսալի լուծումներ առաջարկող համակարգ է։ Մենք ձգտում ենք ապահովել մարդկանց, բնակարանների, բիզնեսների և տարբեր օբյեկտների անվտանգությունը՝ համատեղելով մասնագիտական մոտեցումը և ժամանակակից տեխնոլոգիաները։",
-
-
-        advantagesTitle:
-        "Ինչու THOR",
-
-
-        advantage1Title:
-        "Հուսալիություն",
-
-        advantage1Text:
-        "Ձեր անվտանգությունը մեր առաջնահերթությունն է։",
-
-
-        advantage2Title:
-        "Արագ արձագանք",
-
-        advantage2Text:
-        "Արագ և արդյունավետ գործողություններ անհրաժեշտ պահին։",
-
-
-        advantage3Title:
-        "Ժամանակակից տեխնոլոգիաներ",
-
-        advantage3Text:
-        "Ժամանակակից անվտանգության և տեսահսկման լուծումներ։",
-
-
-        advantage4Title:
-        "Պրոֆեսիոնալ մոտեցում",
-
-        advantage4Text:
-        "Անհատական մոտեցում յուրաքանչյուր հաճախորդի և օբյեկտի նկատմամբ։",
-
-
-        galleryTitle:
-        "Նկարներ",
-
-
-        contactTitle:
-        "Կապ մեզ հետ",
-
-        phoneTitle:
-        "Հեռախոս",
-
-        addressTitle:
-        "Հասցե",
-
-        contactText:
-        "Ձեր անվտանգությունը մեր առաջնահերթությունն է։"
-
-    },
-
-
-    ru: {
-
-        home: "Главная",
-
-        servicesMenu: "Услуги",
-
-        aboutMenu: "О нас",
-
-        advantagesMenu: "Почему THOR",
-
-        galleryMenu: "Фотографии",
-
-        contactMenu: "Контакты",
-
-
-        heroText:
-        "Современные и надежные решения для безопасности вас, вашего дома и вашего бизнеса.",
-
-
-        servicesTitle:
-        "Наши услуги",
-
-        servicesIntro:
-        "THOR предлагает современные решения в сфере безопасности.",
-
-
-        service1Title:
-        "Физическая охрана",
-
-        service1Text:
-        "Профессиональные охранные услуги для защиты вас и вашего имущества.",
-
-
-        service2Title:
-        "Системы видеонаблюдения",
-
-        service2Text:
-        "Установка и обслуживание современных систем видеонаблюдения и безопасности.",
-
-
-        service3Title:
-        "Служба быстрого реагирования",
-
-        service3Text:
-        "Быстрое и эффективное реагирование в опасных ситуациях.",
-
-
-        service4Title:
-        "Защита домов и бизнеса",
-
-        service4Text:
-        "Комплексное обеспечение безопасности вашего дома, квартиры и бизнеса.",
-
-
-        aboutTitle:
-        "О нас",
-
-        aboutText:
-        "THOR Security — система, предлагающая современные и надежные решения в сфере безопасности. Мы стремимся обеспечивать безопасность людей, домов, бизнеса и различных объектов, сочетая профессиональный подход и современные технологии.",
-
-
-        advantagesTitle:
-        "Почему THOR",
-
-
-        advantage1Title:
-        "Надежность",
-
-        advantage1Text:
-        "Ваша безопасность — наш главный приоритет.",
-
-
-        advantage2Title:
-        "Быстрое реагирование",
-
-        advantage2Text:
-        "Быстрые и эффективные действия в нужный момент.",
-
-
-        advantage3Title:
-        "Современные технологии",
-
-        advantage3Text:
-        "Современные решения в области безопасности и видеонаблюдения.",
-
-
-        advantage4Title:
-        "Профессиональный подход",
-
-        advantage4Text:
-        "Индивидуальный подход к каждому клиенту и объекту.",
-
-
-        galleryTitle:
-        "Фотографии",
-
-
-        contactTitle:
-        "Связаться с нами",
-
-        phoneTitle:
-        "Телефон",
-
-        addressTitle:
-        "Адрес",
-
-        contactText:
-        "Ваша безопасность — наш главный приоритет."
-
-    },
-
-
-    en: {
-
-        home: "Home",
-
-        servicesMenu: "Services",
-
-        aboutMenu: "About Us",
-
-        advantagesMenu: "Why THOR",
-
-        galleryMenu: "Photos",
-
-        contactMenu: "Contact",
-
-
-        heroText:
-        "Modern and reliable security solutions for you, your home and your business.",
-
-
-        servicesTitle:
-        "Our Services",
-
-        servicesIntro:
-        "THOR provides modern security solutions for your protection.",
-
-
-        service1Title:
-        "Physical Security",
-
-        service1Text:
-        "Professional security services to protect you and your property.",
-
-
-        service2Title:
-        "Video Surveillance",
-
-        service2Text:
-        "Installation and maintenance of modern video surveillance and security systems.",
-
-
-        service3Title:
-        "Rapid Response Service",
-
-        service3Text:
-        "Fast and effective response in dangerous situations.",
-
-
-        service4Title:
-        "Home and Business Protection",
-
-        service4Text:
-        "Comprehensive security solutions for your home, apartment and business.",
-
-
-        aboutTitle:
-        "About Us",
-
-        aboutText:
-        "THOR Security provides modern and reliable security solutions. We aim to protect people, homes, businesses and various facilities by combining professional expertise with modern technologies.",
-
-
-        advantagesTitle:
-        "Why THOR",
-
-
-        advantage1Title:
-        "Reliability",
-
-        advantage1Text:
-        "Your safety is our highest priority.",
-
-
-        advantage2Title:
-        "Rapid Response",
-
-        advantage2Text:
-        "Fast and effective action when it matters.",
-
-
-        advantage3Title:
-        "Modern Technologies",
-
-        advantage3Text:
-        "Modern security and video surveillance solutions.",
-
-
-        advantage4Title:
-        "Professional Approach",
-
-        advantage4Text:
-        "An individual approach to every client and facility.",
-
-
-        galleryTitle:
-        "Photos",
-
-
-        contactTitle:
-        "Contact Us",
-
-        phoneTitle:
-        "Phone",
-
-        addressTitle:
-        "Address",
-
-        contactText:
-        "Your safety is our highest priority."
-
-    }
-
-};
-
-
-
-/* =========================
-   LANGUAGE SELECTOR
-========================= */
-
-const languageInfo = {
-
-    hy: {
-        flag: "🇦🇲",
-        name: "Հայ"
-    },
-
-    ru: {
-        flag: "🇷🇺",
-        name: "Рус"
-    },
-
-    en: {
-        flag: "🇬🇧",
-        name: "ENG"
-    }
-
-};
-
-
-
-function toggleLanguageMenu() {
-
-    const selector =
-        document.getElementById("languageSelector");
-
-    selector.classList.toggle("open");
-
+const translations={
+hy:{
+home:"Գլխավոր",servicesMenu:"Ծառայություններ",aboutMenu:"Մեր մասին",advantagesMenu:"Առավելություններ",galleryMenu:"Նկարներ",contactMenu:"Հետադարձ կապ",
+heroText:"Ժամանակակից և հուսալի անվտանգության լուծումներ Ձեր, Ձեր տան և Ձեր բիզնեսի համար։",
+servicesTitle:"Մեր ծառայությունները",servicesIntro:"THOR համակարգը առաջարկում է անվտանգության ժամանակակից լուծումներ։",
+service1Title:"Ֆիզիկական պահպանություն",service1Text:"Մասնագիտական պահնորդական ծառայություններ Ձեր և Ձեր գույքի անվտանգության համար։",
+service2Title:"Տեսահսկման համակարգեր",service2Text:"Ժամանակակից տեսահսկման և անվտանգության համակարգերի տեղադրում և սպասարկում։",
+service3Title:"Արագ արձագանքման ծառայություն",service3Text:"Արագ և արդյունավետ արձագանք վտանգավոր իրավիճակների դեպքում։",
+service4Title:"Բնակարանների և բիզնեսների պաշտպանություն",service4Text:"Ձեր տան, բնակարանի և բիզնեսի համալիր անվտանգության ապահովում։",
+aboutTitle:"Մեր մասին",aboutText:"THOR Security-ը անվտանգության ոլորտում ժամանակակից և հուսալի լուծումներ առաջարկող համակարգ է։ Մենք ձգտում ենք ապահովել մարդկանց, բնակարանների, բիզնեսների և տարբեր օբյեկտների անվտանգությունը՝ համատեղելով մասնագիտական մոտեցումը և ժամանակակից տեխնոլոգիաները։",
+advantagesTitle:"Ինչու THOR",advantage1Title:"Հուսալիություն",advantage1Text:"Ձեր անվտանգությունը մեր առաջնահերթությունն է։",advantage2Title:"Արագ արձագանք",advantage2Text:"Արագ և արդյունավետ գործողություններ անհրաժեշտ պահին։",advantage3Title:"Ժամանակակից տեխնոլոգիաներ",advantage3Text:"Ժամանակակից անվտանգության և տեսահսկման լուծումներ։",advantage4Title:"Պրոֆեսիոնալ մոտեցում",advantage4Text:"Անհատական մոտեցում յուրաքանչյուր հաճախորդի և օբյեկտի նկատմամբ։",
+galleryTitle:"Նկարներ",contactTitle:"Կապ մեզ հետ",phoneTitle:"Հեռախոս",addressTitle:"Հասցե",contactText:"Ձեր անվտանգությունը մեր առաջնահերթությունն է։"
+},
+ru:{
+home:"Главная",servicesMenu:"Услуги",aboutMenu:"О нас",advantagesMenu:"Почему THOR",galleryMenu:"Фотографии",contactMenu:"Контакты",
+heroText:"Современные и надежные решения для безопасности вас, вашего дома и вашего бизнеса.",
+servicesTitle:"Наши услуги",servicesIntro:"THOR предлагает современные решения в сфере безопасности.",
+service1Title:"Физическая охрана",service1Text:"Профессиональные охранные услуги для защиты вас и вашего имущества.",
+service2Title:"Системы видеонаблюдения",service2Text:"Установка и обслуживание современных систем видеонаблюдения и безопасности.",
+service3Title:"Служба быстрого реагирования",service3Text:"Быстрое и эффективное реагирование в опасных ситуациях.",
+service4Title:"Защита домов и бизнеса",service4Text:"Комплексное обеспечение безопасности вашего дома, квартиры и бизнеса.",
+aboutTitle:"О нас",aboutText:"THOR Security — система, предлагающая современные и надежные решения в сфере безопасности. Мы стремимся обеспечивать безопасность людей, домов, бизнеса и различных объектов, сочетая профессиональный подход и современные технологии.",
+advantagesTitle:"Почему THOR",advantage1Title:"Надежность",advantage1Text:"Ваша безопасность — наш главный приоритет.",advantage2Title:"Быстрое реагирование",advantage2Text:"Быстрые и эффективные действия в нужный момент.",advantage3Title:"Современные технологии",advantage3Text:"Современные решения в области безопасности и видеонаблюдения.",advantage4Title:"Профессиональный подход",advantage4Text:"Индивидуальный подход к каждому клиенту и объекту.",
+galleryTitle:"Фотографии",contactTitle:"Связаться с нами",phoneTitle:"Телефон",addressTitle:"Адрес",contactText:"Ваша безопасность — наш главный приоритет."
+},
+en:{
+home:"Home",servicesMenu:"Services",aboutMenu:"About Us",advantagesMenu:"Why THOR",galleryMenu:"Photos",contactMenu:"Contact",
+heroText:"Modern and reliable security solutions for you, your home and your business.",
+servicesTitle:"Our Services",servicesIntro:"THOR provides modern security solutions for your protection.",
+service1Title:"Physical Security",service1Text:"Professional security services to protect you and your property.",
+service2Title:"Video Surveillance",service2Text:"Installation and maintenance of modern video surveillance and security systems.",
+service3Title:"Rapid Response Service",service3Text:"Fast and effective response in dangerous situations.",
+service4Title:"Home and Business Protection",service4Text:"Comprehensive security solutions for your home, apartment and business.",
+aboutTitle:"About Us",aboutText:"THOR Security provides modern and reliable security solutions. We aim to protect people, homes, businesses and various facilities by combining professional expertise with modern technologies.",
+advantagesTitle:"Why THOR",advantage1Title:"Reliability",advantage1Text:"Your safety is our highest priority.",advantage2Title:"Rapid Response",advantage2Text:"Fast and effective action when it matters.",advantage3Title:"Modern Technologies",advantage3Text:"Modern security and video surveillance solutions.",advantage4Title:"Professional Approach",advantage4Text:"An individual approach to every client and facility.",
+galleryTitle:"Photos",contactTitle:"Contact Us",phoneTitle:"Phone",addressTitle:"Address",contactText:"Your safety is our highest priority."
+}};
+
+const languageInfo={hy:{flag:"🇦🇲",name:"Հայ"},ru:{flag:"🇷🇺",name:"Рус"},en:{flag:"🇬🇧",name:"ENG"}};
+
+function toggleLanguageMenu(){
+    document.getElementById("languageSelector").classList.toggle("open");
 }
-
-
-
-function setLanguage(language) {
-
-    if (!translations[language]) {
-        return;
-    }
-
-
-    document
-        .querySelectorAll("[data-key]")
-        .forEach(function(element) {
-
-            const key =
-                element.getAttribute("data-key");
-
-            if (
-                translations[language][key]
-            ) {
-
-                element.textContent =
-                    translations[language][key];
-
-            }
-
-        });
-
-
-    const info =
-        languageInfo[language];
-
-
-    document.getElementById(
-        "currentFlag"
-    ).textContent = info.flag;
-
-
-    document.getElementById(
-        "currentLanguage"
-    ).textContent = info.name;
-
-
-    document
-        .querySelectorAll(".language-option")
-        .forEach(function(button) {
-
-            button.classList.remove("selected");
-
-        });
-
-
-    const selected =
-        document.querySelector(
-            '.language-option[data-language="' +
-            language +
-            '"]'
-        );
-
-
-    if (selected) {
-        selected.classList.add("selected");
-    }
-
-
-    document.documentElement.lang =
-        language;
-
-
-    document
-        .getElementById("languageSelector")
-        .classList.remove("open");
-
+function setLanguage(language){
+    document.querySelectorAll("[data-key]").forEach(el=>{
+        const key=el.getAttribute("data-key");
+        if(translations[language][key]) el.textContent=translations[language][key];
+    });
+    document.getElementById("currentFlag").textContent=languageInfo[language].flag;
+    document.getElementById("currentLanguage").textContent=languageInfo[language].name;
+    document.querySelectorAll(".language-option").forEach(b=>b.classList.remove("selected"));
+    const selected=document.querySelector('.language-option[data-language="'+language+'"]');
+    if(selected) selected.classList.add("selected");
+    document.documentElement.lang=language;
+    document.getElementById("languageSelector").classList.remove("open");
 }
+document.addEventListener("click",e=>{
+    const selector=document.getElementById("languageSelector");
+    if(selector&&!selector.contains(e.target)) selector.classList.remove("open");
+});
 
-
-
-/* =========================
-   CLOSE LANGUAGE MENU
-   WHEN CLICKING OUTSIDE
-========================= */
-
-document.addEventListener(
-    "click",
-    function(event) {
-
-        const selector =
-            document.getElementById(
-                "languageSelector"
-            );
-
-
-        if (
-            selector &&
-            !selector.contains(event.target)
-        ) {
-
-            selector.classList.remove("open");
-
-        }
-
-    }
-);
-
-
-
-/* =========================
-   PHOTO OPEN
-========================= */
-
-function openPhoto(image) {
-
-    const modal =
-        document.getElementById(
-            "photoModal"
-        );
-
-    const modalImage =
-        document.getElementById(
-            "modalImage"
-        );
-
-
-    modalImage.src = image;
-
-    modal.classList.add("active");
-
-    document.body.style.overflow =
-        "hidden";
-
+function openPhoto(image){
+    document.getElementById("modalImage").src=image;
+    document.getElementById("photoModal").classList.add("active");
+    document.body.style.overflow="hidden";
 }
-
-
-
-/* =========================
-   PHOTO CLOSE
-========================= */
-
-function closePhoto(event) {
-
-    if (
-        event.target.id === "photoModal" ||
-        event.target.classList.contains(
-            "close-modal"
-        )
-    ) {
-
-        const modal =
-            document.getElementById(
-                "photoModal"
-            );
-
-
-        modal.classList.remove(
-            "active"
-        );
-
-
-        document.body.style.overflow =
-            "";
-
+function closePhoto(event){
+    if(event.target.id==="photoModal"||event.target.classList.contains("close-modal")){
+        document.getElementById("photoModal").classList.remove("active");
+        document.body.style.overflow="";
     }
-
 }
-
-
-
-/* =========================
-   ESC CLOSE PHOTO
-========================= */
-
-document.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (event.key === "Escape") {
-
-            const modal =
-                document.getElementById(
-                    "photoModal"
-                );
-
-
-            modal.classList.remove(
-                "active"
-            );
-
-
-            document.body.style.overflow =
-                "";
-
-        }
-
+document.addEventListener("keydown",e=>{
+    if(e.key==="Escape"){
+        document.getElementById("photoModal").classList.remove("active");
+        document.body.style.overflow="";
     }
-);
-
-
-
-/* =========================
-   DEFAULT LANGUAGE
-========================= */
-
+});
 setLanguage("hy");
-
 </script>
-
 </body>
 </html>
