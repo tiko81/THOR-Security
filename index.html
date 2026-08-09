@@ -141,6 +141,9 @@ nav a:hover{color:#c9a227}
     font-weight:300;cursor:pointer;line-height:1;z-index:10000
 }
 
+.gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);width:50px;height:70px;border:none;background:rgba(0,0,0,.45);color:#fff;font-size:48px;line-height:1;cursor:pointer;z-index:10001;transition:.2s}.gallery-arrow:hover{background:rgba(201,162,39,.9)}.gallery-prev{left:20px}.gallery-next{right:20px}
+@media(max-width:700px){.gallery-arrow{width:42px;height:58px;font-size:38px;background:rgba(0,0,0,.35)}.gallery-prev{left:8px}.gallery-next{right:8px}}
+
 /* CONTACT */
 .contact{padding:85px 20px;background:#111;color:#fff;text-align:center}
 .contact .section-title{color:#fff}
@@ -187,7 +190,7 @@ footer{background:#080808;color:#777;text-align:center;padding:20px;font-size:14
             linear-gradient(rgba(0,0,0,.28),rgba(0,0,0,.48)),
             url("thor-mobile.jpg");
         background-size:cover;
-        background-position:center center;
+        background-position:center 30%;
     }
 
     .logo{width:85px;top:18px;left:18px}
@@ -317,7 +320,9 @@ footer{background:#080808;color:#777;text-align:center;padding:20px;font-size:14
 
 <div class="photo-modal" id="photoModal" onclick="closePhoto(event)">
     <span class="close-modal" onclick="closePhoto(event)">×</span>
+    <button class="gallery-arrow gallery-prev" onclick="changePhoto(-1, event)">‹</button>
     <img id="modalImage" src="" alt="THOR Security" onclick="event.stopPropagation()">
+    <button class="gallery-arrow gallery-next" onclick="changePhoto(1, event)">›</button>
 </div>
 
 <section class="contact" id="contact">
@@ -402,23 +407,16 @@ document.addEventListener("click",e=>{
     if(selector&&!selector.contains(e.target)) selector.classList.remove("open");
 });
 
-function openPhoto(image){
-    document.getElementById("modalImage").src=image;
-    document.getElementById("photoModal").classList.add("active");
-    document.body.style.overflow="hidden";
-}
-function closePhoto(event){
-    if(event.target.id==="photoModal"||event.target.classList.contains("close-modal")){
-        document.getElementById("photoModal").classList.remove("active");
-        document.body.style.overflow="";
-    }
-}
-document.addEventListener("keydown",e=>{
-    if(e.key==="Escape"){
-        document.getElementById("photoModal").classList.remove("active");
-        document.body.style.overflow="";
-    }
-});
+const galleryPhotos=["IMG_001.jpg","IMG_002.jpg","IMG_003.jpg","IMG_004.jpg","IMG_005.jpg","IMG_006.jpg","IMG_007.jpg","IMG_008.jpg","IMG_009.jpg","IMG_010.jpg"];
+let currentPhoto=0,touchStartX=0,touchEndX=0;
+function openPhoto(image){currentPhoto=galleryPhotos.indexOf(image);if(currentPhoto<0)currentPhoto=0;showPhoto();document.getElementById("photoModal").classList.add("active");document.body.style.overflow="hidden";}
+function showPhoto(){document.getElementById("modalImage").src=galleryPhotos[currentPhoto];}
+function changePhoto(direction,event){event.stopPropagation();currentPhoto+=direction;if(currentPhoto<0)currentPhoto=galleryPhotos.length-1;if(currentPhoto>=galleryPhotos.length)currentPhoto=0;showPhoto();}
+function closePhoto(event){if(event.target.id==="photoModal"||event.target.classList.contains("close-modal")){document.getElementById("photoModal").classList.remove("active");document.body.style.overflow="";}}
+const modal=document.getElementById("photoModal");
+modal.addEventListener("touchstart",e=>{touchStartX=e.changedTouches[0].screenX},{passive:true});
+modal.addEventListener("touchend",e=>{touchEndX=e.changedTouches[0].screenX;const d=touchStartX-touchEndX;if(Math.abs(d)<50)return;if(d>0)changePhoto(1,e);else changePhoto(-1,e);},{passive:false});
+document.addEventListener("keydown",e=>{const m=document.getElementById("photoModal");if(!m.classList.contains("active"))return;if(e.key==="ArrowRight")changePhoto(1,e);if(e.key==="ArrowLeft")changePhoto(-1,e);if(e.key==="Escape"){m.classList.remove("active");document.body.style.overflow="";}});
 setLanguage("hy");
 </script>
 </body>
